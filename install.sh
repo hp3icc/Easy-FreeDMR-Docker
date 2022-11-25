@@ -31,7 +31,7 @@ sudo nano /etc/freedmr/freedmr.cfg ;;
 2)
 sudo nano /etc/freedmr/rules.py ;;
 3)
-sudo nano /opt/FDMR-Monitor/fdmr-mon.cfg ;;
+sudo nano /etc/freedmr/fdmr-mon.cfg ;;
 4)
 start-fdmr ;;
 5)
