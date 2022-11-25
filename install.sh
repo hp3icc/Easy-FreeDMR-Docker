@@ -9,14 +9,13 @@ sudo sed -i 's/VOICE_IDENT: True/VOICE_IDENT: False/' /etc/freedmr/freedmr.cfg
 sudo cat > /bin/menu <<- "EOF"
 #!/bin/bash
 while : ; do
-choix=$(whiptail --title "Raspbian Proyect HP3ICC EasyFreeDMR Docker Version" --menu "move up or down with the keyboard arrows and select your option by pressing enter:" 23 56 13 \
+choix=$(whiptail --title "Raspbian Proyect HP3ICC EasyFreeDMR Docker Version" --menu "move up or down with the keyboard arrows and select your option by pressing enter:" 17 56 8 \
 1 " Edit FreeDMR Server " \
 2 " Edit Interlink  " \
 3 " Edit FDMR-Monitor  " \
-4 " Edit Port HTTP  " \
-5 " Start & Restart FreeDMR Server  " \
-6 " Stop FreeDMR Server " \
-7 " update " 3>&1 1>&2 2>&3)
+4 " Start & Restart FreeDMR Server  " \
+5 " Stop FreeDMR Server " \
+6 " update " 3>&1 1>&2 2>&3)
 exitstatus=$?
 #on recupere ce choix
 #exitstatus=$?
@@ -34,12 +33,10 @@ sudo nano /etc/freedmr/rules.py ;;
 3)
 sudo nano /opt/FDMR-Monitor/fdmr-mon.cfg ;;
 4)
-sudo nano /etc/apache2/ports.conf && systemctl restart apache2.service ;;
-5)
 start-fdmr ;;
-6)
+5)
 stop-fdmr ;;
-7)
+6)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/update.sh)";
 esac
 done
