@@ -211,9 +211,10 @@ chown -R 54000 /etc/freedmr &&
 
 echo Get docker-compose.yml...
 cd /etc/freedmr &&
-#curl https://gitlab.hacknix.net/hacknix/FreeDMR/-/raw/master/docker-configs/docker-compose.yml -o docker-compose.yml &&
-curl https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/docker-compose.yml -o docker-compose.yml &&
 docker exec -it freedmr-docker-mariadb-1 bash -c "cd /hbmon && python3 mon_db.py"
+
+#curl https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/docker-compose.yml -o docker-compose.yml &&
+curl https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/easy-free-self/docker-compose.yml -o docker-compose.yml &&
 
 chmod 755 /etc/cron.daily/lastheard
 
