@@ -40,7 +40,7 @@ start-fdmr ;;
 6)
 stop-fdmr ;;
 7)
-update-fdmr;
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/update.sh)";
 esac
 done
 exit 0
