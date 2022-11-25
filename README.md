@@ -56,15 +56,15 @@ To integrate your server to the freedmr network, you must contact the telegram g
  
   * FreeDMR Server:  
    
-   /opt/FreeDMR/config/FreeDMR.cfg
+  /etc/freedmr/freedmr.cfg  
    
   * FreeDMR Rules: 
    
-   /opt/FreeDMR/config/FreeDMR.cfg
+  /etc/freedmr/rules.py  
    
   * FDMR-Monitor: 
    
-   /opt/FDMR-Monitor/fdmr-mon.cfg 
+   fdmr-mon.cfg 
    
   #
   
@@ -84,13 +84,13 @@ To integrate your server to the freedmr network, you must contact the telegram g
   
   * FDMR-Monitor: 
    
-   fdmr_mon.service
+   
   
  #
   
  # Dashboard Files
  
- /var/www/html/
+ 
 
 #
 
@@ -100,12 +100,7 @@ To integrate your server to the freedmr network, you must contact the telegram g
  
  * http://www.freedmr.uk/index.php/freedmr-server-install/
  
-  * https://github.com/yuvelq/FDMR-Monitor/tree/Self_Service
+  
  
- * https://www.daniloaz.com/es/como-crear-un-usuario-en-mysql-mariadb-y-concederle-permisos-para-una-base-de-datos-desde-la-linea-de-comandos/
- 
- * https://www.tecmint.com/install-lamp-debian-11/
-
- * https://styde.net/crear-una-base-de-datos-en-mysql-mariadb/
 
 
