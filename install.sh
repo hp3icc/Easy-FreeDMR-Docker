@@ -1,7 +1,7 @@
 #!/bin/sh
 ######################################
 #curl https://gitlab.hacknix.net/hacknix/FreeDMR/-/raw/master/docker-configs/docker-compose_install.sh | bash
-curl https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/docker-compose_install.sh | bash
+curl https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/easy-free-self/docker-compose_install.sh | bash
 
 ######################################
 chmod 755 /etc/freedmr -R
