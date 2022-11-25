@@ -57,8 +57,8 @@ services:
         cpu_shares: 512
         depends_on:
             - freedmr
-        volumes:
-            - '/etc/freedmr/fdmr-mon.cfg:/opt/FDMR-Monitor/fdmr-mon.cfg'
+ #       volumes:
+  #          - '/etc/freedmr/fdmr-mon.cfg:/opt/FDMR-Monitor/fdmr-mon.cfg'
             
         image: 'gitlab.hacknix.net:5050/freedmr/freedmrmonitor2/freedmrmonitor2:monitor-latest'
         restart: "unless-stopped"
