@@ -1,5 +1,4 @@
 # Easy-FreeDMR-Docker
-Easy FreeDMR auto install Docker Version With menu
 
 #
  ![alt text](https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/FreeDMR-Docker.png)
