@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd /hbmon
+python /hbmon/monitor.py
+

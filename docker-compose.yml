@@ -1,4 +1,4 @@
-version: '3.1'
+version: '2.4'
 services:
 
     freedmr:
@@ -37,6 +37,7 @@ services:
 
     mariadb:
         image: 'mariadb:10.6'
+        container_name: mariadb
         working_dir: /hbmon
         volumes:
             - './hbmon:/hbmon'
@@ -51,19 +52,28 @@ services:
 
     webserver:
         image: 'nginx:alpine'
+        container_name: webserver
         working_dir: /hbmon
         volumes:
             - './hbmon:/hbmon'
-            - './phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf'
+            - './docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf'
         ports:
             - '80:80'
 
-    hbmon:
-        build: phpdocker/php-fpm
+    php-fpm:
+        build: docker/php-fpm
+        container_name: php-fpm
         working_dir: /hbmon
         volumes:
             - './hbmon:/hbmon'
-            - './phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/8.1/fpm/conf.d/99-overrides.ini'
+            - './docker/php-fpm/php-ini-overrides.ini:/etc/php/8.1/fpm/conf.d/99-overrides.ini'
+
+    python:
+        build: docker/python
+        container_name: python
+        working_dir: /hbmon
+        volumes:
+            - './hbmon:/hbmon'
 
 networks:
   app_net:
