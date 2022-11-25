@@ -1,6 +1,5 @@
 # Easy-FreeDMR-Docker
 
-#
  ![alt text](https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/FreeDMR-Docker.png)
 
 is an excerpt from the emq-TE1ws proyect, focused on new and current sysops who want to install FreeDMR Docker Version easily, quickly and up-to-date.
