@@ -62,28 +62,9 @@ To integrate your server to the freedmr network, you must contact the telegram g
    
   * FDMR-Monitor: 
    
-   fdmr-mon.cfg 
-   
-  #
-  
-  # Systemctl Services :
-  
-  * Freedmr: 
-   
-   freedmr.service
-   
-  * FreeDMR Proxy: 
-   
-   proxy.service
-   
-  * FreeDMR Parrot: 
-   
-   fdmrparrot.service
-  
-  * FDMR-Monitor: 
+    
    
    
-  
  #
   
  # Dashboard Files
