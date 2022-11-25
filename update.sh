@@ -3,7 +3,7 @@
 sudo cat > /bin/menu-update <<- "EOF"
 #!/bin/bash
 while : ; do
-choix=$(whiptail --title "Raspbian Proyect HP3ICC EasyFreeDMR Menu Update" --menu "move up or down with the keyboard arrows and select your option by pressing enter:" 23 56 13 \
+choix=$(whiptail --title "Raspbian Proyect HP3ICC EasyFreeDMR Menu Update" --menu "move up or down with the keyboard arrows and select your option by pressing enter:" 10 56 6 \
 1 " Update FreeDMR Server " \
 2 " Main menu " 3>&1 1>&2 2>&3)
 exitstatus=$?
