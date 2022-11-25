@@ -213,7 +213,7 @@ echo Get docker-compose.yml...
 cd /etc/freedmr &&
 #curl https://gitlab.hacknix.net/hacknix/FreeDMR/-/raw/master/docker-configs/docker-compose.yml -o docker-compose.yml &&
 curl https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/docker-compose.yml -o docker-compose.yml &&
-
+docker exec -it freedmr-docker-mariadb-1 bash -c "cd /hbmon && python3 mon_db.py"
 
 chmod 755 /etc/cron.daily/lastheard
 
@@ -231,7 +231,7 @@ EOF
 /usr/sbin/sysctl -p &&
 
 echo Run FreeDMR container...
-docker-compose up -d
+#docker-compose up -d
 
 echo Read notes in /etc/freedmr/docker-compose.yml to understand how to implement extra functionality.
 echo FreeDMR setup complete!
