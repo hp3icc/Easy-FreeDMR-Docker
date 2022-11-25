@@ -1,0 +1,75 @@
+version: '3.1'
+services:
+
+    freedmr:
+        container_name: freedmr
+        cpu_shares: 1024
+        mem_reservation: 600m
+        volumes:
+            - '/etc/freedmr/freedmr.cfg:/opt/freedmr/freedmr.cfg'
+            - '/var/log/freedmr/:/opt/freedmr/log/'
+            - '/etc/freedmr/rules.py:/opt/freedmr/rules.py'
+            #Write JSON files outside of container
+            - '/etc/freedmr/json/:/opt/freedmr/json/'
+
+        ports:
+            - '62031:62031/udp'
+            #Change the below to inlude ports used for your OBP(s)
+            - '62041:62041/udp'
+        image: 'gitlab.hacknix.net:5050/hacknix/freedmr:latest'
+        restart: "unless-stopped"
+        networks:
+           app_net:
+             ipv4_address: 172.16.238.10
+        #Control parameters inside container
+        environment:
+            #IPV6 support 
+            - FDPROXY_IPV6=0
+            #Display connection stats in log
+            - FDPROXY_STATS=1
+            #Display conneting client info in log
+            - FDPROXY_CLIENTINFO=1
+            #Debug HBP session in log (lots of data!!)
+            - FDPROXY_DEBUG=0
+            #Override proxy external port
+            #- FDPROXY_LISTENPORT=62031
+        read_only: true
+
+    mariadb:
+        image: 'mariadb:10.6'
+        working_dir: /hbmon
+        volumes:
+            - './hbmon:/hbmon'
+            - './mysql:/var/lib/mysql'
+        environment:
+            - MYSQL_ROOT_PASSWORD=hbmon
+            - MYSQL_DATABASE=hbmon
+            - MYSQL_USER=hbmon
+            - MYSQL_PASSWORD=hbmon
+        ports:
+            - '8306:3306'
+
+    webserver:
+        image: 'nginx:alpine'
+        working_dir: /hbmon
+        volumes:
+            - './hbmon:/hbmon'
+            - './phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf'
+        ports:
+            - '80:80'
+
+    hbmon:
+        build: phpdocker/php-fpm
+        working_dir: /hbmon
+        volumes:
+            - './hbmon:/hbmon'
+            - './phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/8.1/fpm/conf.d/99-overrides.ini'
+
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
+          gateway: 172.16.238.1
