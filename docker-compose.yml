@@ -80,7 +80,7 @@ services:
         volumes:
              - '/etc/freedmr/certs/:/opt/apachecerts/'
              - '/etc/freedmr/acme.sh:/root/.acme.sh/'
-            - '/etc/freedmr/logo.png:/var/www/html/buttons.php'
+            - '/etc/freedmr/buttons.php:/var/www/html/buttons.php'
             - '/etc/freedmr/logo.png:/var/www/html/img/logo.png'
             - '/etc/freedmr/html/:/var/www/html/'
         ports:
