@@ -19,7 +19,7 @@ case $choix in
 1)
 update-fdmr;;
 2)
-breack;
+break;
 esac
 done
 exit 0
