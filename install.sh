@@ -1,7 +1,6 @@
 #!/bin/sh
 ######################################
 curl https://gitlab.hacknix.net/hacknix/FreeDMR/-/raw/master/docker-configs/docker-compose_install.sh | bash
-#curl https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/docker-compose_install.sh | bash
 ######################################
 chmod 755 /etc/freedmr -R
 sudo sed -i 's/VOICE_IDENT: True/VOICE_IDENT: False/' /etc/freedmr/freedmr.cfg
