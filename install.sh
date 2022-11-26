@@ -213,9 +213,9 @@ cp -r /tmp/Easy-FreeDMR-Docker/docker /etc/freedmr
 
 echo "Downloading hbmon..."
 
-sudo git clone https://github.com/yuvelq/FDMR-Monitor.git /etc/freedmr/hbmon
+git clone https://github.com/yuvelq/FDMR-Monitor.git /etc/freedmr/hbmon
 cd /etc/freedmr/hbmon
-sudo git checkout Self_Service
+git checkout Self_Service
 
 echo "Configuring..."
 
