@@ -43,10 +43,10 @@ services:
             - './hbmon:/hbmon'
             - './mysql:/var/lib/mysql'
         environment:
-            - MYSQL_ROOT_PASSWORD=hbmon
-            - MYSQL_DATABASE=hbmon
-            - MYSQL_USER=hbmon
-            - MYSQL_PASSWORD=hbmon
+            - MYSQL_ROOT_PASSWORD=
+            - MYSQL_DATABASE=selfcare
+            - MYSQL_USER=emqte1
+            - MYSQL_PASSWORD=
         ports:
             - '8306:3306'
 
