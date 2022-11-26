@@ -29,9 +29,7 @@ RUN	apk update && \
 	pip install --no-cache-dir -r requirements.txt && \
 	apk del git gcc musl-dev && \
 	chown -R radio /hbmon
-	chmod +x install.sh
-	./install.sh
-
+	
 USER radio
 
 ENTRYPOINT [ "/entrypoint" ]
