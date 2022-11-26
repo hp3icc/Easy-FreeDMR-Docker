@@ -217,11 +217,13 @@ cp -rf /tmp/Easy-FreeDMR-Docker/docker /etc/freedmr
 
 echo "Downloading hbmon..."
 cd /opt
-git clone https://github.com/yuvelq/FDMR-Monitor/tree/Self_Service
+#git clone https://github.com/yuvelq/FDMR-Monitor/tree/Self_Service
+git clone https://github.com/yuvelq/FDMR-Monitor.git 
 cd FDMR-Monitor
 git checkout Self_Service
 
 echo "Configuring..."
+chmod +x *
 apt install python3 python3-pip python3-dev libffi-dev libssl-dev cargo sed \
 default-libmysqlclient-dev build-essential -y
 pip3 install -r requirements.txt
