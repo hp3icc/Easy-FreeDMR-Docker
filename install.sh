@@ -39,6 +39,7 @@ systemctl restart docker
 
 echo "Make config directory..."
 mkdir /etc/freedmr &&
+mkdir /etc/freedmr/hbmon &&
 mkdir -p /etc/freedmr/acme.sh && 
 mkdir -p /etc/freedmr/certs &&
 chmod -R 755 /etc/freedmr
