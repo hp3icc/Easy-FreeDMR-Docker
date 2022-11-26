@@ -15,6 +15,7 @@ RUN apt-get clean; \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 RUN git clone https://github.com/yuvelq/FDMR-Monitor.git /hbmon && \
+	cd FDMR-Monitor
 	git checkout Self_Service
 
 RUN cd /hbmon && pip3 install --no-cache-dir -r requirements.txt 
