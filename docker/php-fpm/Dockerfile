@@ -11,5 +11,5 @@ RUN apt-get clean; \
 
 RUN git clone https://github.com/yuvelq/FDMR-Monitor.git /hbmon && \
 	git checkout Self_Service
-	
+
 

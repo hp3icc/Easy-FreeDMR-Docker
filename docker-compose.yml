@@ -17,10 +17,11 @@ services:
             #Change the below to inlude ports used for your OBP(s)
             - '62041:62041/udp'
         image: 'gitlab.hacknix.net:5050/hacknix/freedmr:latest'
-        restart: "unless-stopped"
+        restart: "always"
         networks:
            app_net:
              ipv4_address: 172.16.238.10
+
         #Control parameters inside container
         environment:
             #IPV6 support 
@@ -38,6 +39,7 @@ services:
     mariadb:
         image: 'mariadb:10.6'
         container_name: mariadb
+        restart: "always"
         working_dir: /hbmon
         volumes:
             - './hbmon:/hbmon'
@@ -49,32 +51,54 @@ services:
             - MYSQL_PASSWORD=
         ports:
             - '8306:3306'
+        networks:
+           app_net:
+             ipv4_address: 172.16.238.11
+             
 
     webserver:
         image: 'nginx:alpine'
         container_name: webserver
+        restart: "always"
         working_dir: /hbmon
         volumes:
             - './hbmon:/hbmon'
             - './docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf'
         ports:
             - '80:80'
+        networks:
+           app_net:
+             ipv4_address: 172.16.238.12
+             
 
     php-fpm:
         build: docker/php-fpm
         container_name: php-fpm
+        restart: "always"
         working_dir: /hbmon
         volumes:
             - './hbmon:/hbmon'
             - './docker/php-fpm/php-ini-overrides.ini:/etc/php/8.1/fpm/conf.d/99-overrides.ini'
-
+        networks:
+           app_net:
+             ipv4_address: 172.16.238.13
+             
     python:
         build: docker/python
         container_name: python
+        restart: "always"
         working_dir: /hbmon
         volumes:
             - './hbmon:/hbmon'
-
+        ports:
+            - '9000:9000'
+        depends_on:
+            - 'freedmr'
+            - 'mariadb'
+        networks:
+           app_net:
+             ipv4_address: 172.16.238.14
+             
 networks:
   app_net:
     driver: bridge

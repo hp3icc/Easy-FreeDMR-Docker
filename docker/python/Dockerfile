@@ -24,14 +24,12 @@ RUN adduser -D -u 54001 radio
 RUN	apk update && \
 	apk add git gcc musl-dev libffi-dev libressl-dev cargo mariadb-connector-c-dev && \
 	git clone https://github.com/yuvelq/FDMR-Monitor.git /hbmon && \
-#	git checkout Self_Service && \
+	cd /hbmon && \
+	git checkout Self_Service && \
 	pip install --no-cache-dir -r requirements.txt && \
 	apk del git gcc musl-dev && \
 	chown -R radio /hbmon
-#	cp fdmr-mon_SAMPLE.cfg fdmr-mon.cfg
-	./install.sh
-	cp fdmr-mon_SAMPLE.cfg fdmr-mon.cfg
-	
+
 USER radio
 
 ENTRYPOINT [ "/entrypoint" ]

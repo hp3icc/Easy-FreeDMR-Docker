@@ -1,33 +1,28 @@
 #!/bin/sh
 ######################################
 
-
 echo FreeDMR Docker installer...
 
 echo Installing required packages...
 echo Install Docker Community Edition...
-apt-get -y remove docker docker-engine docker.io &&
-apt-get -y update &&
-apt-get -y install git apt-transport-https ca-certificates curl gnupg2 software-properties-common &&
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add - &&
-ARCH=`/usr/bin/arch`
-echo "System architecture is $ARCH" 
-if [ "$ARCH" == "x86_64" ]
-then
-    ARCH="amd64"
-fi
-add-apt-repository \
-   "deb [arch=$ARCH] https://download.docker.com/linux/debian \
-   $(lsb_release -cs) \
-   stable" &&
-apt-get -y update &&
-apt-get -y install docker-ce &&
 
-echo Install Docker Compose...
-apt-get -y install docker-compose &&
+sudo apt-get remove docker docker-engine docker.io containerd runc
+
+sudo apt-get update
+sudo apt-get install git ca-certificates curl gnupg lsb-release
+
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 echo Set userland-proxy to false...
-cat <<EOF > /etc/docker/daemon.json &&
+cat <<EOF > /etc/docker/daemon.json
 {
      "userland-proxy": false,
      "experimental": true,
@@ -39,20 +34,20 @@ cat <<EOF > /etc/docker/daemon.json &&
 }
 EOF
 
-echo Restart docker...
-systemctl restart docker &&
+echo "Restart docker..."
+systemctl restart docker
 
-echo Make config directory...
+echo "Make config directory..."
 mkdir /etc/freedmr &&
 mkdir -p /etc/freedmr/acme.sh && 
 mkdir -p /etc/freedmr/certs &&
-chmod -R 755 /etc/freedmr &&
+chmod -R 755 /etc/freedmr
 
-echo make json directory...
+echo "make json directory..."
 mkdir -p /etc/freedmr/json &&
-chown 54000:54000 /etc/freedmr/json &&
+chown 54000:54000 /etc/freedmr/json
 
-echo Install /etc/freedmr/freedmr.cfg ... 
+echo "Install /etc/freedmr/freedmr.cfg ..."
 
 cat << EOF > /etc/freedmr/freedmr.cfg
 [GLOBAL]
@@ -188,14 +183,14 @@ TGID_TS2_ACL: PERMIT:ALL
 ANNOUNCEMENT_LANGUAGE: es_ES
 EOF
 
-echo Install rules.py ...
-echo "BRIDGES = {'9990': [{'SYSTEM': 'ECHO', 'TS': 2, 'TGID': 9990, 'ACTIVE': True, 'TIMEOUT': 2, 'TO_TYPE': 'NONE', 'ON': [], 'OFF': [], 'RESET': []},]}" > /etc/freedmr/rules.py &&
+echo "Install rules.py..."
+echo "BRIDGES = {'9990': [{'SYSTEM': 'ECHO', 'TS': 2, 'TGID': 9990, 'ACTIVE': True, 'TIMEOUT': 2, 'TO_TYPE': 'NONE', 'ON': [], 'OFF': [], 'RESET': []},]}" > /etc/freedmr/rules.py
 
-echo Set perms on config directory...
-chown -R 54000 /etc/freedmr &&
+echo "Set perms on config directory..."
+chown -R 54000 /etc/freedmr
 
-echo Tune network stack...
-cat << EOF > /etc/sysctl.conf &&
+echo "Tune network stack..."
+cat << EOF > /etc/sysctl.conf
 net.core.rmem_default=134217728
 net.core.rmem_max=134217728
 net.core.wmem_max=134217728                       
@@ -205,7 +200,7 @@ net.netfilter.nf_conntrack_udp_timeout=15
 net.netfilter.nf_conntrack_udp_timeout_stream=35
 EOF
 
-/usr/sbin/sysctl -p &&
+/usr/sbin/sysctl -p
 
 
 
@@ -213,36 +208,46 @@ echo "Downloading Easy-FreeDMR-Docker..."
 
 git clone https://github.com/hp3icc/Easy-FreeDMR-Docker.git /tmp/Easy-FreeDMR-Docker &&
 cp /tmp/Easy-FreeDMR-Docker/docker-compose.yml /etc/freedmr &&
-cp -r /tmp/Easy-FreeDMR-Docker/docker /etc/freedmr &&
+cp -r /tmp/Easy-FreeDMR-Docker/docker /etc/freedmr
 
 echo "Downloading hbmon..."
 
-#cd /opt && 
-#  sudo git clone https://github.com/yuvelq/FDMR-Monitor.git &&
-#  cd FDMR-Monitor &&
-#  sudo git checkout Self_Service &&
-#  chmod +x * &&
+sudo git clone https://github.com/yuvelq/FDMR-Monitor.git /etc/freedmr/hbmon
+cd /etc/freedmr/hbmon
+sudo git checkout Self_Service
 
 echo "Configuring..."
 
+cp fdmr-mon_SAMPLE.cfg fdmr-mon.cfg
 
+sed -i "s/FDMR_IP .*/FDMR_IP = 172.16.238.10/" fdmr-mon.cfg
+
+sed -i "s/PRIVATE_NETWORK .*/PRIVATE_NETWORK = False/" fdmr-mon.cfg
+sed -i "s/DB_SERVER .*/DB_SERVER = mariadb/" fdmr-mon.cfg
+sed -i "s/DB_USERNAME .*/DB_USERNAME = hbmon/" fdmr-mon.cfg
+sed -i "s/DB_PASSWORD .*/DB_PASSWORD = hbmon/" fdmr-mon.cfg
+sed -i "s/DB_NAME .*/DB_NAME = hbmon/" fdmr-mon.cfg
+
+sed -i "s/TGID_URL .*/TGID_URL = https://freedmr.cymru/talkgroups/talkgroup_ids_json.php" fdmr-mon.cfg
+
+
+sed -i "s/path2config .*/path2config = \"\/hbmon\/fdmr-mon.cfg\";/" html/include/config.php
+
+$path2config = "/opt/FDMR-Monitor/fdmr-mon.cfg";
+
+
+
+chmod -R 777 /etc/freedmr/hbmon/log
 
 echo "Run FreeDMR container..."
 
-docker-compose up -d
+docker compose up -d
 
-echo "Waiting for mysql..."
-sleep 20
-docker exec -it python sh -c "cd /hbmon && python mon_db.py"
+echo "Read notes in /etc/freedmr/docker-compose.yml to understand how to implement extra functionality."
+echo "FreeDMR setup complete!"
 
-
-echo Read notes in /etc/freedmr/docker-compose.yml to understand how to implement extra functionality.
-echo FreeDMR setup complete!
-
-
-
-
-
+echo "Wait some minutes and execute this command"
+echo docker exec -it python sh -c "cd /hbmon && python mon_db.py --create"
 
 
 ######################################
@@ -284,25 +289,22 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker
 esac
 done
 exit 0
-
-
-
-
 EOF
+
 ##
 cp /bin/menu /bin/MENU
 
 sudo cat > /bin/start-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
-docker-compose down
-docker-compose up -d
+docker compose down
+docker compose up -d
 EOF
 #
 sudo cat > /bin/stop-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
-docker-compose down
+docker compose down
 EOF
 #
 
