@@ -233,9 +233,6 @@ sed -i "s/TGID_URL .*/TGID_URL = https://freedmr.cymru/talkgroups/talkgroup_ids_
 
 sed -i "s/path2config .*/path2config = \"\/hbmon\/fdmr-mon.cfg\";/" html/include/config.php
 
-$path2config = "/opt/FDMR-Monitor/fdmr-mon.cfg";
-
-
 
 chmod -R 777 /etc/freedmr/hbmon/log
 
