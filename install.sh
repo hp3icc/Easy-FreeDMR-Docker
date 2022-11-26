@@ -211,17 +211,17 @@ EOF
 
 echo "Downloading Easy-FreeDMR-Docker..."
 
-git clone https://github.com/hp3icc/Easy-FreeDMR-Docker.git /tmp/Easy-FreeDMR-Docker
-cp /tmp/Easy-FreeDMR-Docker/docker-compose.yml /etc/freedmr
-cp -rf /tmp/Easy-FreeDMR-Docker/docker /etc/freedmr
+git clone https://github.com/hp3icc/Easy-FreeDMR-Docker.git /tmp/Easy-FreeDMR-Docker &&
+cp /tmp/Easy-FreeDMR-Docker/docker-compose.yml /etc/freedmr &&
+cp -rf /tmp/Easy-FreeDMR-Docker/docker /etc/freedmr &&
 
 echo "Downloading hbmon..."
 
-cd /opt  
-  sudo git clone https://github.com/yuvelq/FDMR-Monitor.git  
-  cd FDMR-Monitor  
-  sudo git checkout Self_Service  
-  chmod +x *
+cd /opt && 
+  sudo git clone https://github.com/yuvelq/FDMR-Monitor.git &&
+  cd FDMR-Monitor &&
+  sudo git checkout Self_Service &&
+  chmod +x * &&
 
 echo "Configuring..."
 
@@ -292,12 +292,6 @@ EOF
 ##
 cp /bin/menu /bin/MENU
 
-sudo cat > /opt/obp.txt <<- "EOF"
-#Coloque abajo su lista de obp
-
-
-EOF
-#
 sudo cat > /bin/start-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
