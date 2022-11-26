@@ -229,9 +229,9 @@ sed -i "s/DB_USERNAME .*/DB_USERNAME = hbmon/" fdmr-mon.cfg
 sed -i "s/DB_PASSWORD .*/DB_PASSWORD = hbmon/" fdmr-mon.cfg
 sed -i "s/DB_NAME .*/DB_NAME = hbmon/" fdmr-mon.cfg
 
-rm /data/*
+#rm /data/*
 
-sed -i "s/TGID_URL .*/TGID_URL = https:\/\/freedmr.cymru\/talkgroups\/talkgroup_ids_json.php" fdmr-mon.cfg
+sed -i "s/TGID_URL = http:\/\/downloads.freedmr.uk\/downloads\/talkgroup_ids.json/TGID_URL = https:\/\/freedmr.cymru\/talkgroups\/talkgroup_ids_json.php" fdmr-mon.cfg
 
 sed -i "s/path2config .*/path2config = \"\/hbmon\/fdmr-mon.cfg\";/" html/include/config.php
 
