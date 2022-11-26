@@ -216,16 +216,43 @@ cp /tmp/Easy-FreeDMR-Docker/docker-compose.yml /etc/freedmr
 cp -rf /tmp/Easy-FreeDMR-Docker/docker /etc/freedmr
 
 echo "Downloading hbmon..."
+cd /opt
 git clone https://github.com/yuvelq/FDMR-Monitor/tree/Self_Service
+cd FDMR-Monitor
 git checkout Self_Service
 
 echo "Configuring..."
+apt install python3 python3-pip python3-dev libffi-dev libssl-dev cargo sed \
+default-libmysqlclient-dev build-essential -y
+pip3 install -r requirements.txt
 
+sudo sed -i 's/RELOAD_TIME = 15/RELOAD_TIME = 1/' /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
+sudo sed -i 's/FREQUENCY = 10/FREQUENCY = 120/' /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
+sudo chmod 644 /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
+sed '33 a <!--' -i /opt/FDMR-Monitor/html/sysinfo.php
+sed '35 a -->' -i /opt/FDMR-Monitor/html/sysinfo.php
 
+sudo sed -i 's/localhost_2-day.png/localhost_1-day.png/' /opt/FDMR-Monitor/html/sysinfo.php
 
+sudo sed -i "s/root/emqte1/g"  /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
+sudo sed -i "s/test/selfcare/g"  /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
+sudo sed -i "s/PRIVATE_NETWORK = True/PRIVATE_NETWORK = False/g"  /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
+sudo sed -i "s/TGID_URL =/#TGID_URL =/g"  /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
+sed '63 a TGID_URL = https://freedmr.cymru/talkgroups/talkgroup_ids_json.php' -i /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
+sed '64 a #TGID_URL = https://freedmr.cymru/talkgroups/talkgroup_ids_flags_json.php' -i /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
+sudo rm /opt/FDMR-Monitor/data/*
+cd /opt/FDMR-Monitor/
+sudo rm /opt/FDMR-Monitor/install.sh
+cc/emq-TE1ws/main/self/install.sh
+sudo chmod +x /opt/FDMR-Monitor/*.py
+sudo rm -r /var/www/html/ 
+cp -r /opt/FDMR-Monitor/html/ /var/www/ 
+      
+sudo chown www-data:www-data /var/www/html/ -R
+     
 
-
-
+cp /opt/FDMR-Monitor/utils/logrotate/fdmr_mon /etc/logrotate.d/
+#
 
 echo "Run FreeDMR container..."
 
