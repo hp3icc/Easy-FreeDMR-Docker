@@ -243,15 +243,16 @@ sed '64 a #TGID_URL = https://freedmr.cymru/talkgroups/talkgroup_ids_flags_json.
 sudo rm /opt/FDMR-Monitor/data/*
 cd /opt/FDMR-Monitor/
 sudo rm /opt/FDMR-Monitor/install.sh
-cc/emq-TE1ws/main/self/install.sh
+
 sudo chmod +x /opt/FDMR-Monitor/*.py
 sudo rm -r /var/www/html/ 
 cp -r /opt/FDMR-Monitor/html/ /var/www/ 
       
 sudo chown www-data:www-data /var/www/html/ -R
      
-
 cp /opt/FDMR-Monitor/utils/logrotate/fdmr_mon /etc/logrotate.d/
+python3 mon_db.py --create
+python3 mon_db.py --update
 #
 
 echo "Run FreeDMR container..."
