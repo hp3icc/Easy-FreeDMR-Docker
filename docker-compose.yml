@@ -40,7 +40,7 @@ services:
         read_only: true
 
     mariadb:
-        image: 'lscr.io/linuxserver/mariadb:latest'
+        image: 'jamielsharief/mysql:latest'
         container_name: mariadb
         restart: "always"
         working_dir: /hbmon
@@ -48,12 +48,12 @@ services:
             - './hbmon:/hbmon'
             - './mysql:/config'
         environment:
-            - MYSQL_ROOT_PASSWORD=hbmon
+            - MYSQL_ROOT_PASSWORD=root
             - MYSQL_DATABASE=hbmon
             - MYSQL_USER=hbmon
             - MYSQL_PASSWORD=hbmon
         ports:
-            - '8306:3306'
+            - '3307:3306'
         networks:
            app_net:
              ipv4_address: 172.16.238.11
