@@ -48,6 +48,7 @@ chmod -R 755 /etc/freedmr
 echo "make json directory..."
 mkdir -p /etc/freedmr/json
 chown 54000:54000 /etc/freedmr/json
+chown 54000:54000 /etc/freedmr/json
 
 echo "Install /etc/freedmr/freedmr.cfg ..."
 
@@ -264,6 +265,8 @@ git clone https://github.com/hp3icc/Easy-FreeDMR-Docker.git /tmp/Easy-FreeDMR-Do
 cp /tmp/Easy-FreeDMR-Docker/docker-compose.yml /etc/freedmr
 cp -r /tmp/Easy-FreeDMR-Docker/docker /etc/freedmr
 cp /etc/freedmr/docker/mariadb/hbmon.sql /etc/freedmr/mysql/initdb.d/
+chown -R 54000 /etc/freedmr/hbmon/log
+
 #################
 sed -i "s/DB_NAME .*/DB_NAME = hbmon/" fdmr-mon.cfg
 
