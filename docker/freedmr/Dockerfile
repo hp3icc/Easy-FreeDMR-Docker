@@ -17,8 +17,6 @@
 ###############################################################################
 FROM python:3.10-alpine
 
-ENTRYPOINT [ "/entrypoint" ]
-
 RUN adduser -D -u 54000 radio && \
         apk update && \
         apk add git gcc musl-dev mariadb-connector-c-dev && \
@@ -31,4 +29,7 @@ RUN adduser -D -u 54000 radio && \
         chown -R radio: /opt/freedmr
 
 COPY entrypoint-proxy /entrypoint
+
 USER radio
+
+ENTRYPOINT [ "/entrypoint" ]
