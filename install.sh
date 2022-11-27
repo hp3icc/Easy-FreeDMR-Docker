@@ -1,4 +1,8 @@
 #!/bin/sh
+if [[ $EUID -ne 0 ]]; then
+	whiptail --title "CL-Link" --msgbox "Debe ejecutar este script como usuario ROOT" 0 50
+	exit 0
+fi
 ######################################
 
 echo FreeDMR Docker installer...
@@ -294,7 +298,7 @@ sed -i 's/var\/www\/html/etc\/freedmr\/hbmon\/html/' /etc/freedmr/hbmon/sysinfo/
 sed -i "s/opt\/HBMonv2/etc\/freedmr\/hbmon/g"  /etc/freedmr/hbmon/sysinfo/*.sh
 sed '33 a <!--' -i /etc/freedmr/hbmon/html/sysinfo.php
 sed '35 a -->' -i /etc/freedmr/hbmon/html/sysinfo.php
-sudo sed -i 's/localhost_2-day.png/localhost_1-day.png/' /etc/freedmr/hbmon/html/sysinfo.php
+sed -i 's/localhost_2-day.png/localhost_1-day.png/' /etc/freedmr/hbmon/html/sysinfo.php
 
 chmod +x /etc/freedmr/hbmon/sysinfo/cpu.sh
 chmod +x /etc/freedmr/hbmon/sysinfo/graph.sh
