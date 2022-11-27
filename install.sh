@@ -42,6 +42,7 @@ mkdir /etc/freedmr
 mkdir /etc/freedmr/hbmon
 mkdir -p /etc/freedmr/acme.sh
 mkdir -p /etc/freedmr/certs
+mkdir -p /etc/freedmr/mysql/initdb.d
 chmod -R 755 /etc/freedmr
 
 echo "make json directory..."
@@ -260,6 +261,7 @@ fi
 git clone https://github.com/hp3icc/Easy-FreeDMR-Docker.git /tmp/Easy-FreeDMR-Docker
 cp /tmp/Easy-FreeDMR-Docker/docker-compose.yml /etc/freedmr
 cp -r /tmp/Easy-FreeDMR-Docker/docker /etc/freedmr
+cp /etc/freedmr/docker/mariadb/hbmon.sql /etc/freedmr/mysql/initdb.d/
 #################
 sed -i "s/DB_NAME .*/DB_NAME = hbmon/" fdmr-mon.cfg
 

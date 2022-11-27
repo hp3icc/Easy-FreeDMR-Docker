@@ -46,7 +46,7 @@ services:
         working_dir: /hbmon
         volumes:
             - './hbmon:/hbmon'
-            - './mysql:/var/lib/mysql'
+            - './mysql:/config'
         environment:
             - MYSQL_ROOT_PASSWORD=hbmon
             - MYSQL_DATABASE=hbmon

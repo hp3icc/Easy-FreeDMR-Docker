@@ -21,11 +21,10 @@ ENTRYPOINT [ "/entrypoint" ]
 
 RUN adduser -D -u 54000 radio && \
         apk update && \
-        apk add git gcc musl-dev && \
+        apk add git gcc musl-dev mariadb-connector-c-dev && \
         cd /opt && \
         git clone https://gitlab.hacknix.net/hacknix/FreeDMR.git freedmr && \
         cd /opt/freedmr && \
-	git checkout testing && \
         pip install --no-cache-dir -r requirements.txt && \
         pip install mysqlclient && \
         apk del git gcc musl-dev && \
@@ -33,5 +32,3 @@ RUN adduser -D -u 54000 radio && \
 
 COPY entrypoint-proxy /entrypoint
 USER radio
-
-
