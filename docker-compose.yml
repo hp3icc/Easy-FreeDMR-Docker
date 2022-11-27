@@ -11,6 +11,8 @@ services:
             - '/etc/freedmr/rules.py:/opt/freedmr/rules.py'
             #Write JSON files outside of container
             - '/etc/freedmr/json/:/opt/freedmr/json/'
+            # Proxy with Self Care support
+            - './hbmon/proxy/hotspot_proxy_v2.py:/opt/freedmr/hotspot_proxy_v2.py'
 
         ports:
             - '62031:62031/udp'
@@ -37,7 +39,7 @@ services:
         read_only: true
 
     mariadb:
-        image: lscr.io/linuxserver/mariadb:latest
+        image: 'lscr.io/linuxserver/mariadb:latest'
         container_name: mariadb
         restart: "always"
         working_dir: /hbmon
