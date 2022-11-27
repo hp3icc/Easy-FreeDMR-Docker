@@ -37,7 +37,7 @@ services:
         read_only: true
 
     mariadb:
-        image: 'mariadb:10.6'
+        image: lscr.io/linuxserver/mariadb:latest
         container_name: mariadb
         restart: "always"
         working_dir: /hbmon
