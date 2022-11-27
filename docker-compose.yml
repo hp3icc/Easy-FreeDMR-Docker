@@ -2,6 +2,7 @@ version: '2.4'
 services:
 
     freedmr:
+        build: docker/freedmr
         container_name: freedmr
         cpu_shares: 1024
         mem_reservation: 600m
@@ -19,7 +20,6 @@ services:
             - '62031:62031/udp'
             #Change the below to inlude ports used for your OBP(s)
             - '62041:62041/udp'
-        image: 'gitlab.hacknix.net:5050/hacknix/freedmr:latest'
         restart: "always"
         networks:
            app_net:

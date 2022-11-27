@@ -1,0 +1,37 @@
+###############################################################################
+# Copyright (C) 2020 Simon Adlem, G7RZU <g7rzu@gb7fr.org.uk>  
+#
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program; if not, write to the Free Software Foundation,
+#   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+###############################################################################
+FROM python:3.10-alpine
+
+ENTRYPOINT [ "/entrypoint" ]
+
+RUN adduser -D -u 54000 radio && \
+        apk update && \
+        apk add git gcc musl-dev && \
+        cd /opt && \
+        git clone https://gitlab.hacknix.net/hacknix/FreeDMR.git freedmr && \
+        cd /opt/freedmr && \
+	git checkout testing && \
+        pip install --no-cache-dir -r requirements.txt && \
+        pip install mysqlclient && \
+        apk del git gcc musl-dev && \
+        chown -R radio: /opt/freedmr
+
+COPY entrypoint-proxy /entrypoint
+USER radio
+
+
