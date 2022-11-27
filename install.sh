@@ -265,16 +265,14 @@ git clone https://github.com/hp3icc/Easy-FreeDMR-Docker.git /tmp/Easy-FreeDMR-Do
 cp /tmp/Easy-FreeDMR-Docker/docker-compose.yml /etc/freedmr
 cp -r /tmp/Easy-FreeDMR-Docker/docker /etc/freedmr
 cp /etc/freedmr/docker/mariadb/hbmon.sql /etc/freedmr/mysql/initdb.d/
-chown -R 54000 /etc/freedmr/hbmon/log
 
 #################
-sed -i "s/DB_NAME .*/DB_NAME = hbmon/" fdmr-mon.cfg
-
 echo "Downloading hbmon..."
 
 git clone https://github.com/yuvelq/FDMR-Monitor.git /etc/freedmr/hbmon
 cd /etc/freedmr/hbmon
 git checkout Self_Service
+chown -R 54000 /etc/freedmr/hbmon/log
 
 echo "Configuring..."
 
