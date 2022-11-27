@@ -48,7 +48,7 @@ services:
             - './hbmon:/hbmon'
             - './mysql:/config'
         environment:
-            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_ROOT_PASSWORD=hbmon
             - MYSQL_DATABASE=hbmon
             - MYSQL_USER=hbmon
             - MYSQL_PASSWORD=hbmon
