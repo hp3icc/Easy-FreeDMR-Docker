@@ -53,7 +53,7 @@ services:
             - MYSQL_USER=hbmon
             - MYSQL_PASSWORD=hbmon
         ports:
-            - '3307:3306'
+            - '8306:3306'
         networks:
            app_net:
              ipv4_address: 172.16.238.11
