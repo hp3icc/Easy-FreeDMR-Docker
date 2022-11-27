@@ -286,7 +286,25 @@ sed -i "s/DB_USERNAME .*/DB_USERNAME = hbmon/" fdmr-mon.cfg
 sed -i "s/DB_PASSWORD .*/DB_PASSWORD = hbmon/" fdmr-mon.cfg
 sed -i "s/DB_NAME .*/DB_NAME = hbmon/" fdmr-mon.cfg
 
-#rm /data/*
+rm /etc/freedmr/hbmon/data/*
+apt-get install rrdtool -y
+
+sudo sed -i 's/var\/www\/html/etc\/freedmr\/hbmon\/html/' /etc/freedmr/hbmon/sysinfo/cpu.sh
+sudo sed -i 's/var\/www\/html/etc\/freedmr\/hbmon\/html/' /etc/freedmr/hbmon/sysinfo/graph.sh
+sudo sed -i "s/opt\/HBMonv2/etc\/freedmr\/hbmon/g"  /etc/freedmr/hbmon/sysinfo/*.sh
+
+
+chmod +x /etc/freedmr/hbmon/sysinfo/cpu.sh
+chmod +x /etc/freedmr/hbmon/sysinfo/graph.sh
+chmod +x /etc/freedmr/hbmon/sysinfo/rrd-db.sh
+
+rm /etc/freedmr/hbmon/sysinfo/*.rrd
+sh /etc/freedmr/hbmon/sysinfo/rrd-db.sh
+
+(crontab -l; echo "*/5 * * * * sh /etc/freedmr/hbmon/sysinfo/graph.sh")|awk '!x[$0]++'|crontab -
+(crontab -l; echo "*/2 * * * * sh /etc/freedmr/hbmon/sysinfo/cpu.sh")|awk '!x[$0]++'|crontab -
+(crontab -l; echo "0 3 * * * rm /etc/freedmr/hbmon/data/*")|awk '!x[$0]++'|crontab -
+
 
 sed -i "s/TGID_URL .*/TGID_URL = https:\/\/freedmr.cymru\/talkgroups\/talkgroup_ids_json.php/" fdmr-mon.cfg
 
