@@ -182,8 +182,7 @@ SUB_ACL: DENY:1
 TGID_TS1_ACL: PERMIT:ALL
 TGID_TS2_ACL: PERMIT:ALL
 ANNOUNCEMENT_LANGUAGE: es_ES
-EOF
-#
+
 [PROXY]
 MASTER = 127.0.0.1
 LISTENPORT = 62031
@@ -209,6 +208,7 @@ DB_NAME = hbmon
 PORT = 3306
 EOF
 #
+
 echo "Install rules.py..."
 
 cat << EOF >/etc/freedmr/rules.py
