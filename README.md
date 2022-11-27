@@ -8,7 +8,7 @@ this shell, install FreeDMR Server and FDMR-Monitor
 
 #
 
-FreeDMR Server with Dashboard by OA4DOA ,last original version gitlab hacknix Simon.
+FreeDMR Server Self-Service version Docker by CA5RPY Rodrig, with Dashboard by OA4DOA ,last original version gitlab FreeDMR by hacknix Simon.
 
 #
 
