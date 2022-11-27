@@ -305,8 +305,28 @@ sed -i 's/localhost_2-day.png/localhost_1-day.png/' /etc/freedmr/hbmon/html/sysi
 chmod +x /etc/freedmr/hbmon/sysinfo/cpu.sh
 chmod +x /etc/freedmr/hbmon/sysinfo/graph.sh
 chmod +x /etc/freedmr/hbmon/sysinfo/rrd-db.sh
-
-rm /etc/freedmr/hbmon/sysinfo/*.rrd
+#
+if [ -f "/etc/freedmr/hbmon/sysinfo/hdd.rrd" ];
+then
+	
+    rm -rf /etc/freedmr/hbmon/sysinfo/*.rrd
+fi
+if [ -f "/etc/freedmr/hbmon/sysinfo/load.rrd" ];
+then
+	
+    rm -rf /etc/freedmr/hbmon/sysinfo/*.rrd
+fi
+if [ -f "/etc/freedmr/hbmon/sysinfo/mem.rrd" ];
+then
+	
+    rm -rf /etc/freedmr/hbmon/sysinfo/*.rrd
+fi
+if [ -f "/etc/freedmr/hbmon/sysinfo/tempC.rrd" ];
+then
+	
+    rm -rf /etc/freedmr/hbmon/sysinfo/*.rrd
+fi
+#
 sh /etc/freedmr/hbmon/sysinfo/rrd-db.sh
 
 (crontab -l; echo "*/5 * * * * sh /etc/freedmr/hbmon/sysinfo/graph.sh")|awk '!x[$0]++'|crontab -
