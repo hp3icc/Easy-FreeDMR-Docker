@@ -227,6 +227,10 @@ if [ -d "/tmp/Easy-FreeDMR-Docker" ];
 then
     rm -rf /tmp/Easy-FreeDMR-Docker
 fi
+if [ -d "/etc/freedmr/docker" ];
+then
+    rm -rf /etc/freedmr/docker
+fi
 #
 git clone https://github.com/hp3icc/Easy-FreeDMR-Docker.git /tmp/Easy-FreeDMR-Docker
 cp /tmp/Easy-FreeDMR-Docker/docker-compose.yml /etc/freedmr
