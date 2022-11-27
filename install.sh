@@ -183,9 +183,11 @@ TGID_TS1_ACL: PERMIT:ALL
 TGID_TS2_ACL: PERMIT:ALL
 ANNOUNCEMENT_LANGUAGE: es_ES
 EOF
-
+#
 echo "Install rules.py..."
-echo "BRIDGES = {
+
+cat << EOF >/etc/freedmr/rules.py
+BRIDGES = {
  
  '9990': [ 
 	{'SYSTEM': 'ECHO', 		'TS': 2, 'TGID': 9990, 'ACTIVE':True, 'TIMEOUT': 0, 'TO_TYPE': 'NONE', 'ON': [], 'OFF': [], 'RESET': []}, 
@@ -196,8 +198,10 @@ echo "BRIDGES = {
 }
 if __name__ == '__main__':
     from pprint import pprint
-    pprint(BRIDGES)" > /etc/freedmr/rules.py
-
+    pprint(BRIDGES)
+    
+EOF
+#
 echo "Set perms on config directory..."
 chown -R 54000 /etc/freedmr
 
@@ -218,7 +222,12 @@ EOF
 
 echo "Downloading Easy-FreeDMR-Docker..."
 
-rm /tmp/Easy-FreeDMR-Docker/ -r
+#
+if [ -d "/tmp/Easy-FreeDMR-Docker" ];
+then
+    rm -rf /tmp/Easy-FreeDMR-Docker
+fi
+#
 git clone https://github.com/hp3icc/Easy-FreeDMR-Docker.git /tmp/Easy-FreeDMR-Docker
 cp /tmp/Easy-FreeDMR-Docker/docker-compose.yml /etc/freedmr
 cp -r /tmp/Easy-FreeDMR-Docker/docker /etc/freedmr
