@@ -365,7 +365,6 @@ chmod +x /bin/start-fdmr
 chmod +x /bin/stop-fdmr
 history -c && history -w
 start-fdmr
-docker exec -it python sh -c "cd /hbmon && python mon_db.py --create"
 menu
 #####
 
