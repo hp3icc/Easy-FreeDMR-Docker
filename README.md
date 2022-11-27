@@ -8,7 +8,7 @@ this shell, install FreeDMR Server and FDMR-Monitor
 
 #
 
-FreeDMR Server Self-Service version Docker by CA5RPY Rodrig, with Dashboard by OA4DOA ,last original version gitlab FreeDMR by hacknix Simon.
+FreeDMR Server Self-Service version Docker by CA5RPY Rodrigo, with Dashboard by OA4DOA ,last original version gitlab FreeDMR by G7RZU hacknix Simon.
 
 #
 
@@ -62,14 +62,14 @@ To integrate your server to the freedmr network, you must contact the telegram g
    
   * FDMR-Monitor: 
    
-    
+   /etc/freedmr/hbmon/fdmr-mon.cfg
    
    
  #
   
  # Dashboard Files
  
- 
+ /etc/freedmr/hbmon/html/
 
 #
 
@@ -79,6 +79,7 @@ To integrate your server to the freedmr network, you must contact the telegram g
  
  * http://www.freedmr.uk/index.php/freedmr-server-install/
  
+ * https://github.com/yuvelq/FDMR-Monitor/tree/Self_Service
   
  
 
