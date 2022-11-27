@@ -289,6 +289,8 @@ sed -i "s/DB_SERVER .*/DB_SERVER = mariadb/" fdmr-mon.cfg
 sed -i "s/DB_USERNAME .*/DB_USERNAME = hbmon/" fdmr-mon.cfg
 sed -i "s/DB_PASSWORD .*/DB_PASSWORD = hbmon/" fdmr-mon.cfg
 sed -i "s/DB_NAME .*/DB_NAME = hbmon/" fdmr-mon.cfg
+sed -i "s/LOG_PATH = .\/log/LOG_PATH = .\//" fdmr-mon.cfg
+sed -i "s/LOG_LEVEL = INFO/LOG_LEVEL = DEBUG/" fdmr-mon.cfg
 
 rm /etc/freedmr/hbmon/data/*
 apt-get install rrdtool -y
