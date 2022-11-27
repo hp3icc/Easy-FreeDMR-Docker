@@ -300,10 +300,6 @@ docker compose up -d
 echo "Read notes in /etc/freedmr/docker-compose.yml to understand how to implement extra functionality."
 echo "FreeDMR setup complete!"
 
-echo "Wait some minutes and execute this command"
-echo docker exec -it python sh -c "cd /hbmon && python mon_db.py --create"
-
-
 ######################################
 chmod 755 /etc/freedmr -R
 
