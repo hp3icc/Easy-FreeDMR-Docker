@@ -32,9 +32,9 @@ EOF
 sudo cat > /bin/update-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
-docker-compose down
-docker-compose pull
-docker-compose up -d
+docker compose down
+docker compose pull
+docker compose up -d
 EOF
 #
 ########################
