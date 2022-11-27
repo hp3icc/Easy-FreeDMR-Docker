@@ -38,14 +38,14 @@ echo "Restart docker..."
 systemctl restart docker
 
 echo "Make config directory..."
-mkdir /etc/freedmr &&
-mkdir /etc/freedmr/hbmon &&
-mkdir -p /etc/freedmr/acme.sh && 
-mkdir -p /etc/freedmr/certs &&
+mkdir /etc/freedmr
+mkdir /etc/freedmr/hbmon
+mkdir -p /etc/freedmr/acme.sh
+mkdir -p /etc/freedmr/certs
 chmod -R 755 /etc/freedmr
 
 echo "make json directory..."
-mkdir -p /etc/freedmr/json &&
+mkdir -p /etc/freedmr/json
 chown 54000:54000 /etc/freedmr/json
 
 echo "Install /etc/freedmr/freedmr.cfg ..."
@@ -207,9 +207,12 @@ EOF
 
 echo "Downloading Easy-FreeDMR-Docker..."
 
-git clone https://github.com/hp3icc/Easy-FreeDMR-Docker.git /tmp/Easy-FreeDMR-Docker &&
-cp /tmp/Easy-FreeDMR-Docker/docker-compose.yml /etc/freedmr &&
+rm /tmp/Easy-FreeDMR-Docker/-r
+git clone https://github.com/hp3icc/Easy-FreeDMR-Docker.git /tmp/Easy-FreeDMR-Docker
+cp /tmp/Easy-FreeDMR-Docker/docker-compose.yml /etc/freedmr
 cp -r /tmp/Easy-FreeDMR-Docker/docker /etc/freedmr
+#################
+sed -i "s/DB_NAME .*/DB_NAME = hbmon/" fdmr-mon.cfg
 
 echo "Downloading hbmon..."
 
