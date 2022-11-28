@@ -425,7 +425,7 @@ chmod -R 777 /etc/freedmr/hbmon/log
 
 echo "Run FreeDMR container..."
 
-docker compose up -d
+#docker compose up -d
 
 echo "Read notes in /etc/freedmr/docker-compose.yml to understand how to implement extra functionality."
 echo "FreeDMR setup complete!"
@@ -473,18 +473,18 @@ EOF
 
 ##
 cp /bin/menu /bin/MENU
-
+docker-compose up -d
 sudo cat > /bin/start-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
-docker compose down
-docker compose up -d
+docker-compose down
+docker-compose up -d
 EOF
 #
 sudo cat > /bin/stop-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
-docker compose down
+docker-compose down
 EOF
 #
 
@@ -494,7 +494,6 @@ chmod +x /bin/MENU
 chmod +x /bin/start-fdmr
 chmod +x /bin/stop-fdmr
 history -c && history -w
-start-fdmr
 menu
 #####
 
