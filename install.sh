@@ -214,6 +214,35 @@ USERNAME: hbmon
 PASSWORD: hbmon
 DB_NAME: hbmon
 PORT: 3306
+
+[D-APRS]
+MODE: MASTER
+ENABLED: True
+REPEAT: False
+MAX_PEERS: 1
+EXPORT_AMBE: False
+IP:
+PORT: 52555
+PASSPHRASE:
+GROUP_HANGTIME: 0
+USE_ACL: True
+REG_ACL: DENY:1
+SUB_ACL: DENY:1
+TGID_TS1_ACL: PERMIT:ALL
+TGID_TS2_ACL: PERMIT:ALL
+DEFAULT_UA_TIMER: 10
+SINGLE_MODE: False
+VOICE_IDENT: False
+TS1_STATIC:
+TS2_STATIC:
+DEFAULT_REFLECTOR: 0
+ANNOUNCEMENT_LANGUAGE: es_ES
+GENERATOR: 2
+ALLOW_UNREG_ID: True
+PROXY_CONTROL: False
+OVERRIDE_IDENT_TG:
+
+
 EOF
 #
 
@@ -419,12 +448,6 @@ sed -i "s/path2config .*/path2config = \"\/hbmon\/fdmr-mon.cfg\";/" html/include
 
 chmod -R 777 /etc/freedmr/hbmon/log
 
-echo "Run FreeDMR container..."
-
-docker compose up -d
-
-echo "Read notes in /etc/freedmr/docker-compose.yml to understand how to implement extra functionality."
-echo "FreeDMR setup complete!"
 
 ######################################
 chmod 755 /etc/freedmr -R
@@ -483,6 +506,12 @@ cd /etc/freedmr
 docker compose down
 EOF
 #
+echo "Run FreeDMR container..."
+
+docker compose up -d
+
+echo "Read notes in /etc/freedmr/docker-compose.yml to understand how to implement extra functionality."
+echo "FreeDMR setup complete!"
 
 #############################################################
 chmod +x /bin/menu*
@@ -490,7 +519,6 @@ chmod +x /bin/MENU
 chmod +x /bin/start-fdmr
 chmod +x /bin/stop-fdmr
 history -c && history -w
-start-fdmr
 menu
 #####
 
