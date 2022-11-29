@@ -1,6 +1,6 @@
 #!/bin/sh
 if [[ $EUID -ne 0 ]]; then
-	whiptail --title "CL-Link" --msgbox "Debe ejecutar este script como usuario ROOT" 0 50
+	whiptail --title "Easy-FreeDMR-Docker" --msgbox "Debe ejecutar este script como usuario ROOT" 0 50
 	exit 0
 fi
 ######################################
