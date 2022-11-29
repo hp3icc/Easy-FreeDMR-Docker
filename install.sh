@@ -43,19 +43,19 @@ systemctl restart docker
 #
 if [ -d "/tmp/Easy-FreeDMR-Docker" ];
 then
-    rm -rf /tmp/Easy-FreeDMR-Docker
+    rm -r /tmp/Easy-FreeDMR-Docker
 fi
 if [ -d "/etc/freedmr" ];
 then
-    rm -rf /etc/freedmr
+    rm -r /etc/freedmr
 fi
 if [ -d "/opt/FreeDMR" ];
 then
-    rm -rf /opt/FreeDMR
+    rm -r /opt/FreeDMR
 fi
 if [ -d "/opt/FDMR-Monitor" ];
 then
-    rm -rf /opt/FDMR-Monitor
+    rm -r /opt/FDMR-Monitor
 fi
 #
 
