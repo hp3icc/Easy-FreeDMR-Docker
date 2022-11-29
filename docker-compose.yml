@@ -13,8 +13,8 @@ services:
             #Write JSON files outside of container
             - '/etc/freedmr/:/opt/freedmr/'
             # Proxy with Self Care support
-#            - './hbmon/proxy/hotspot_proxy_v2.py:/opt/freedmr/hotspot_proxy_v2.py'
-#            - './hbmon/proxy/proxy_db.py:/opt/freedmr/proxy_db.py'
+            - './hbmon/proxy/hotspot_proxy_v2.py:/opt/freedmr/hotspot_proxy_v2.py'
+            - './hbmon/proxy/proxy_db.py:/opt/freedmr/proxy_db.py'
 
         ports:
             - '62031:62031/udp'
