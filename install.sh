@@ -497,6 +497,11 @@ sudo cat > /bin/data-id <<- "EOF"
 wget /etc/freedmr/hbmon/data/talkgroup_ids.json https://freedmr.cymru/talkgroups/talkgroup_ids_json.php -O
 wget /etc/freedmr/hbmon/data/subscriber_ids.csv https://database.radioid.net/static/user.csv -O
 wget /etc/freedmr/hbmon/data/peer_ids.json https://database.radioid.net/static/rptrs.json -O
+
+wget /etc/freedmr/json/talkgroup_ids.json https://freedmr.cymru/talkgroups/talkgroup_ids_json.php -O
+wget /etc/freedmr/json/subscriber_ids.csv https://freedmr.cymru/talkgroups/users.json-O
+wget /etc/freedmr/json/peer_ids.json https://database.radioid.net/static/rptrs.json -O
+
 EOF
 #
 sudo cat > /bin/start-fdmr <<- "EOF"
