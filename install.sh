@@ -248,7 +248,7 @@ EOF
 
 echo "Install rules.py..."
 
-cat << EOF >/etc/freedmr/rules.py
+cat << EOF > /etc/freedmr/rules.py
 BRIDGES = {
  
  '9990': [ 
