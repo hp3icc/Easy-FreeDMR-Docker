@@ -549,7 +549,7 @@ sudo chmod +x /usr/local/bin/cronedit.sh
 
 #################################
 echo "Run FreeDMR container..."
-
+cd /etc/freedmr
 docker compose up -d
 
 echo "Read notes in /etc/freedmr/docker-compose.yml to understand how to implement extra functionality."
