@@ -45,6 +45,25 @@ EOF
 echo "Restart docker..."
 systemctl restart docker
 
+#
+if [ -d "/tmp/Easy-FreeDMR-Docker" ];
+then
+    rm -r /tmp/Easy-FreeDMR-Docker
+fi
+if [ -d "/etc/freedmr" ];
+then
+    rm -r /etc/freedmr
+fi
+if [ -d "/opt/FreeDMR" ];
+then
+    rm -r /opt/FreeDMR
+fi
+if [ -d "/opt/FDMR-Monitor" ];
+then
+    rm -r /opt/FDMR-Monitor
+fi
+#
+
 echo "Make config directory..."
 mkdir /etc/freedmr
 mkdir /etc/freedmr/hbmon
@@ -246,12 +265,13 @@ ALLOW_UNREG_ID: True
 PROXY_CONTROL: False
 OVERRIDE_IDENT_TG:
 
+
 EOF
 #
 
 echo "Install rules.py..."
 
-cat << EOF >/etc/freedmr/rules.py
+cat << EOF > /etc/freedmr/rules.py
 BRIDGES = {
  
  '9990': [ 
@@ -283,20 +303,8 @@ EOF
 
 /usr/sbin/sysctl -p
 
-
-
 echo "Downloading Easy-FreeDMR-Docker..."
 
-#
-if [ -d "/tmp/Easy-FreeDMR-Docker" ];
-then
-    rm -rf /tmp/Easy-FreeDMR-Docker
-fi
-if [ -d "/etc/freedmr/docker" ];
-then
-    rm -rf /etc/freedmr/docker
-fi
-#
 git clone https://github.com/hp3icc/Easy-FreeDMR-Docker.git /tmp/Easy-FreeDMR-Docker
 cp /tmp/Easy-FreeDMR-Docker/docker-compose.yml /etc/freedmr
 cp -r /tmp/Easy-FreeDMR-Docker/docker /etc/freedmr
@@ -324,7 +332,6 @@ sed -i "s/DB_NAME .*/DB_NAME = hbmon/" fdmr-mon.cfg
 sed -i "s/LOG_PATH = .\/log/LOG_PATH = .\//" fdmr-mon.cfg
 sed -i "s/LOG_LEVEL = INFO/LOG_LEVEL = DEBUG/" fdmr-mon.cfg
 
-rm /etc/freedmr/hbmon/data/*
 apt-get install rrdtool -y
 
 sed -i 's/var\/www\/html/etc\/freedmr\/hbmon\/html/' /etc/freedmr/hbmon/sysinfo/cpu.sh
@@ -360,10 +367,9 @@ then
 fi
 #
 sh /etc/freedmr/hbmon/sysinfo/rrd-db.sh
-
 (crontab -l; echo "*/5 * * * * sh /etc/freedmr/hbmon/sysinfo/graph.sh")|awk '!x[$0]++'|crontab -
 (crontab -l; echo "*/2 * * * * sh /etc/freedmr/hbmon/sysinfo/cpu.sh")|awk '!x[$0]++'|crontab -
-(crontab -l; echo "0 3 * * * rm /etc/freedmr/hbmon/data/*")|awk '!x[$0]++'|crontab -
+(crontab -l; echo "* */12 * * * data-id")|awk '!x[$0]++'|crontab -
 ###
 sudo cat > /etc/freedmr/hbmon/html/buttons.php <<- "EOF"
 <!-- HBMonitor buttons HTML code -->
@@ -451,12 +457,6 @@ sed -i "s/path2config .*/path2config = \"\/hbmon\/fdmr-mon.cfg\";/" html/include
 
 chmod -R 777 /etc/freedmr/hbmon/log
 
-echo "Run FreeDMR container..."
-
-#docker compose up -d
-
-echo "Read notes in /etc/freedmr/docker-compose.yml to understand how to implement extra functionality."
-echo "FreeDMR setup complete!"
 
 ######################################
 chmod 755 /etc/freedmr -R
@@ -501,27 +501,72 @@ EOF
 
 ##
 cp /bin/menu /bin/MENU
-docker-compose up -d
+#
+sudo cat > /bin/data-id <<- "EOF"
+#!/bin/bash
+wget /etc/freedmr/hbmon/data/talkgroup_ids.json https://freedmr.cymru/talkgroups/talkgroup_ids_json.php -O
+wget /etc/freedmr/hbmon/data/subscriber_ids.csv https://database.radioid.net/static/user.csv -O
+wget /etc/freedmr/hbmon/data/peer_ids.json https://database.radioid.net/static/rptrs.json -O
+
+wget /etc/freedmr/json/talkgroup_ids.json https://freedmr.cymru/talkgroups/talkgroup_ids_json.php -O
+wget /etc/freedmr/json/subscriber_ids.csv https://freedmr.cymru/talkgroups/users.json-O
+wget /etc/freedmr/json/peer_ids.json https://database.radioid.net/static/rptrs.json -O
+
+EOF
+###############################################
 sudo cat > /bin/start-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
+data-id
 docker-compose down
 docker-compose up -d
+cronedit.sh '* */12 * * *' 'data-id' add
+cronedit.sh '*/5 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/graph.sh' add
+cronedit.sh '*/2 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/cpu.sh' add
 EOF
 #
 sudo cat > /bin/stop-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
 docker-compose down
+cronedit.sh '* */12 * * *' 'data-id' remove
+cronedit.sh '*/5 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/graph.sh' remove
+cronedit.sh '*/2 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/cpu.sh' remove
 EOF
-#
+###############################################
+cat > /usr/local/bin/cronedit.sh <<- "EOF"
+cronjob_editor () {
+# usage: cronjob_editor '<interval>' '<command>' <add|remove>
+if [[ -z "$1" ]] ;then printf " no interval specified\n" ;fi
+if [[ -z "$2" ]] ;then printf " no command specified\n" ;fi
+if [[ -z "$3" ]] ;then printf " no action specified\n" ;fi
+if [[ "$3" == add ]] ;then
+    # add cronjob, no duplication:
+    ( sudo crontab -l | grep -v -F -w "$2" ; echo "$1 $2" ) | sudo crontab -
+elif [[ "$3" == remove ]] ;then
+    # remove cronjob:
+    ( sudo crontab -l | grep -v -F -w "$2" ) | sudo crontab -
+fi
+}
+cronjob_editor "$1" "$2" "$3"
+EOF
+sudo chmod +x /usr/local/bin/cronedit.sh
+
+#################################
+echo "Run FreeDMR container..."
+
+docker-compose up -d
+
+echo "Read notes in /etc/freedmr/docker-compose.yml to understand how to implement extra functionality."
+echo "FreeDMR setup complete!"
 
 #############################################################
 chmod +x /bin/menu*
 chmod +x /bin/MENU
+chmod +x /bin/data-id
 chmod +x /bin/start-fdmr
 chmod +x /bin/stop-fdmr
+data-id
 history -c && history -w
 menu
 #####
-
