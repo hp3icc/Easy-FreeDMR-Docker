@@ -7,11 +7,11 @@ services:
         cpu_shares: 1024
         mem_reservation: 600m
         volumes:
-#            - '/etc/freedmr/freedmr.cfg:/opt/freedmr/freedmr.cfg'
+            - '/etc/freedmr/freedmr.cfg:/opt/freedmr/freedmr.cfg'
             - '/var/log/freedmr/:/opt/freedmr/log/'
-#            - '/etc/freedmr/rules.py:/opt/freedmr/rules.py'
+            - '/etc/freedmr/rules.py:/opt/freedmr/rules.py'
             #Write JSON files outside of container
-            - '/etc/freedmr/:/opt/freedmr/'
+            - '/etc/freedmr/json/:/opt/freedmr/json/'
             # Proxy with Self Care support
             - './hbmon/proxy/hotspot_proxy_v2.py:/opt/freedmr/hotspot_proxy_v2.py'
             - './hbmon/proxy/proxy_db.py:/opt/freedmr/proxy_db.py'
