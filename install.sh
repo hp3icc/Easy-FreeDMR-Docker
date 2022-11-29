@@ -289,9 +289,17 @@ if [ -d "/tmp/Easy-FreeDMR-Docker" ];
 then
     rm -rf /tmp/Easy-FreeDMR-Docker
 fi
-if [ -d "/etc/freedmr/docker" ];
+if [ -d "/etc/freedmr" ];
 then
-    rm -rf /etc/freedmr/docker
+    rm -rf /etc/freedmr
+fi
+if [ -d "/opt/FreeDMR" ];
+then
+    rm -rf /opt/FreeDMR
+fi
+if [ -d "/opt/FDMR-Monitor" ];
+then
+    rm -rf /opt/FDMR-Monitor
 fi
 #
 git clone https://github.com/hp3icc/Easy-FreeDMR-Docker.git /tmp/Easy-FreeDMR-Docker
