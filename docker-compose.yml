@@ -58,7 +58,6 @@ services:
            app_net:
              ipv4_address: 172.16.238.11
              
-
     webserver:
         image: 'nginx:alpine'
         container_name: webserver
@@ -72,9 +71,6 @@ services:
         networks:
            app_net:
              ipv4_address: 172.16.238.12
-        logging:
-              driver: json-file 
-             
 
     php-fpm:
         build: docker/php-fpm
@@ -87,9 +83,7 @@ services:
         networks:
            app_net:
              ipv4_address: 172.16.238.13
-        logging:
-              driver: json-file
-              
+             
     python:
         build: docker/python
         container_name: python
@@ -105,8 +99,7 @@ services:
         networks:
            app_net:
              ipv4_address: 172.16.238.14
-        logging:
-              driver: json-file     
+             
 networks:
   app_net:
     driver: bridge
