@@ -356,7 +356,6 @@ then
 fi
 #
 sh /etc/freedmr/hbmon/sysinfo/rrd-db.sh
-
 (crontab -l; echo "*/5 * * * * sh /etc/freedmr/hbmon/sysinfo/graph.sh")|awk '!x[$0]++'|crontab -
 (crontab -l; echo "*/2 * * * * sh /etc/freedmr/hbmon/sysinfo/cpu.sh")|awk '!x[$0]++'|crontab -
 (crontab -l; echo "* */12 * * * data-id")|awk '!x[$0]++'|crontab -
@@ -503,21 +502,46 @@ wget /etc/freedmr/json/subscriber_ids.csv https://freedmr.cymru/talkgroups/users
 wget /etc/freedmr/json/peer_ids.json https://database.radioid.net/static/rptrs.json -O
 
 EOF
-#
+###############################################
 sudo cat > /bin/start-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
 data-id
 docker compose down
 docker compose up -d
+cronedit.sh '* */12 * * *' 'data-id' add
+cronedit.sh '*/5 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/graph.sh' add
+cronedit.sh '*/2 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/cpu.sh' add
 EOF
 #
 sudo cat > /bin/stop-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
 docker compose down
+cronedit.sh '* */12 * * *' 'data-id' remove
+cronedit.sh '*/5 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/graph.sh' remove
+cronedit.sh '*/2 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/cpu.sh' remove
 EOF
-#
+###############################################
+cat > /usr/local/bin/cronedit.sh <<- "EOF"
+cronjob_editor () {
+# usage: cronjob_editor '<interval>' '<command>' <add|remove>
+if [[ -z "$1" ]] ;then printf " no interval specified\n" ;fi
+if [[ -z "$2" ]] ;then printf " no command specified\n" ;fi
+if [[ -z "$3" ]] ;then printf " no action specified\n" ;fi
+if [[ "$3" == add ]] ;then
+    # add cronjob, no duplication:
+    ( sudo crontab -l | grep -v -F -w "$2" ; echo "$1 $2" ) | sudo crontab -
+elif [[ "$3" == remove ]] ;then
+    # remove cronjob:
+    ( sudo crontab -l | grep -v -F -w "$2" ) | sudo crontab -
+fi
+}
+cronjob_editor "$1" "$2" "$3"
+EOF
+sudo chmod +x /usr/local/bin/cronedit.sh
+
+#################################
 echo "Run FreeDMR container..."
 
 docker compose up -d
