@@ -321,7 +321,6 @@ sed -i "s/DB_NAME .*/DB_NAME = hbmon/" fdmr-mon.cfg
 sed -i "s/LOG_PATH = .\/log/LOG_PATH = .\//" fdmr-mon.cfg
 sed -i "s/LOG_LEVEL = INFO/LOG_LEVEL = DEBUG/" fdmr-mon.cfg
 
-rm /etc/freedmr/hbmon/data/*
 apt-get install rrdtool -y
 
 sed -i 's/var\/www\/html/etc\/freedmr\/hbmon\/html/' /etc/freedmr/hbmon/sysinfo/cpu.sh
