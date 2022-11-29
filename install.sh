@@ -10,7 +10,7 @@ echo FreeDMR Docker installer...
 echo Installing required packages...
 echo Install Docker Community Edition...
 
-sudo apt-get remove docker docker-engine docker.io containerd runc -y
+apt-get remove docker docker-engine docker.io containerd runc -y
 
 apt-get update
 apt-get install git ca-certificates curl gnupg lsb-release -y
@@ -368,7 +368,7 @@ sh /etc/freedmr/hbmon/sysinfo/rrd-db.sh
 (crontab -l; echo "*/2 * * * * sh /etc/freedmr/hbmon/sysinfo/cpu.sh")|awk '!x[$0]++'|crontab -
 (crontab -l; echo "* */12 * * * data-id")|awk '!x[$0]++'|crontab -
 ###
-sudo cat > /etc/freedmr/hbmon/html/buttons.php <<- "EOF"
+cat > /etc/freedmr/hbmon/html/buttons.php <<- "EOF"
 <!-- HBMonitor buttons HTML code -->
 <a class="button" href="index.php">Home</a>
 &nbsp;
@@ -459,7 +459,7 @@ chmod -R 777 /etc/freedmr/hbmon/log
 chmod 755 /etc/freedmr -R
 
 #############################
-sudo cat > /bin/menu <<- "EOF"
+cat > /bin/menu <<- "EOF"
 #!/bin/bash
 while : ; do
 choix=$(whiptail --title "Raspbian Proyect HP3ICC EasyFreeDMR Docker Version" --menu "move up or down with the keyboard arrows and select your option by pressing enter:" 17 56 8 \
@@ -480,11 +480,11 @@ fi
 # case : action en fonction du choix
 case $choix in
 1)
-sudo nano /etc/freedmr/freedmr.cfg ;;
+nano /etc/freedmr/freedmr.cfg ;;
 2)
-sudo nano /etc/freedmr/rules.py ;;
+nano /etc/freedmr/rules.py ;;
 3)
-sudo nano /etc/freedmr/hbmon/fdmr-mon.cfg  ;;
+nano /etc/freedmr/hbmon/fdmr-mon.cfg  ;;
 4)
 start-fdmr ;;
 5)
@@ -499,7 +499,7 @@ EOF
 ##
 cp /bin/menu /bin/MENU
 #
-sudo cat > /bin/data-id <<- "EOF"
+cat > /bin/data-id <<- "EOF"
 #!/bin/bash
 wget /etc/freedmr/hbmon/data/talkgroup_ids.json https://freedmr.cymru/talkgroups/talkgroup_ids_json.php -O
 wget /etc/freedmr/hbmon/data/subscriber_ids.csv https://database.radioid.net/static/user.csv -O
@@ -511,7 +511,7 @@ wget /etc/freedmr/peer_ids.json https://database.radioid.net/static/rptrs.json -
 
 EOF
 ###############################################
-sudo cat > /bin/start-fdmr <<- "EOF"
+cat > /bin/start-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
 data-id
@@ -522,7 +522,7 @@ cronedit.sh '*/5 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/graph.sh' add
 cronedit.sh '*/2 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/cpu.sh' add
 EOF
 #
-sudo cat > /bin/stop-fdmr <<- "EOF"
+cat > /bin/stop-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
 docker compose down
@@ -539,15 +539,15 @@ if [[ -z "$2" ]] ;then printf " no command specified\n" ;fi
 if [[ -z "$3" ]] ;then printf " no action specified\n" ;fi
 if [[ "$3" == add ]] ;then
     # add cronjob, no duplication:
-    ( sudo crontab -l | grep -v -F -w "$2" ; echo "$1 $2" ) | sudo crontab -
+    ( crontab -l | grep -v -F -w "$2" ; echo "$1 $2" ) | crontab -
 elif [[ "$3" == remove ]] ;then
     # remove cronjob:
-    ( sudo crontab -l | grep -v -F -w "$2" ) | sudo crontab -
+    ( crontab -l | grep -v -F -w "$2" ) | crontab -
 fi
 }
 cronjob_editor "$1" "$2" "$3"
 EOF
-sudo chmod +x /usr/local/bin/cronedit.sh
+chmod +x /usr/local/bin/cronedit.sh
 
 #################################
 echo "Run FreeDMR container..."
