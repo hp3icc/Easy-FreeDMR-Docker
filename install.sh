@@ -111,13 +111,14 @@ PATH: ./
 PEER_FILE: peer_ids.json
 SUBSCRIBER_FILE: subscriber_ids.json
 TGID_FILE: talkgroup_ids.json
-PEER_URL: http://freedmr-lh.gb7fr.org.uk/json/peer_ids.json
-SUBSCRIBER_URL: http://freedmr-lh.gb7fr.org.uk/json/subscriber_ids.json
-TGID_URL: http://freedmr-lh.gb7fr.org.uk/json/talkgroup_ids.json
-LOCAL_SUBSCRIBER_FILE: local_subscriber_ids.json
+PEER_URL: https://www.radioid.net/static/rptrs.json
+SUBSCRIBER_URL: https://www.radioid.net/static/users.json
+#TGID_URL: http://downloads.freedmr.uk/downloads/talkgroup_ids.json
+TGID_URL: https://freedmr.cymru/talkgroups/talkgroup_ids_json.php
+LOCAL_SUBSCRIBER_FILE: local_subcriber_ids.json
 STALE_DAYS: 1
-SUB_MAP_FILE: sub_map.pkl
-SERVER_ID_URL: http://freedmr-lh.gb7fr.org.uk/json/server_ids.tsv
+SUB_MAP_FILE:
+SERVER_ID_URL: http://downloads.freedmr.uk/downloads/FreeDMR_Hosts.csv
 SERVER_ID_FILE: server_ids.tsv
 TOPO_FILE: topography.json
 
