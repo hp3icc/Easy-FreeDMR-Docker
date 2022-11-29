@@ -69,7 +69,6 @@ chmod -R 755 /etc/freedmr
 
 echo "make json directory..."
 mkdir -p /etc/freedmr/json
-chown 54000:54000 /etc/freedmr/json
 chown 54000:54000 /etc/freedmr/
 
 echo "Install /etc/freedmr/freedmr.cfg ..."
@@ -89,7 +88,7 @@ ALLOW_NULL_PASSPHRASE: True
 ANNOUNCEMENT_LANGUAGES:
 SERVER_ID: 0
 DATA_GATEWAY: False
-VALIDATE_SERVER_IDS: True
+VALIDATE_SERVER_IDS: False
 
 
 [REPORTS]
