@@ -18,6 +18,7 @@ services:
 
         ports:
             - '62031:62031/udp'
+            - '4321:4321'
             #Change the below to inlude ports used for your OBP(s)
             - '62041:62041/udp'
         restart: "always"
