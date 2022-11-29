@@ -360,7 +360,7 @@ sh /etc/freedmr/hbmon/sysinfo/rrd-db.sh
 
 (crontab -l; echo "*/5 * * * * sh /etc/freedmr/hbmon/sysinfo/graph.sh")|awk '!x[$0]++'|crontab -
 (crontab -l; echo "*/2 * * * * sh /etc/freedmr/hbmon/sysinfo/cpu.sh")|awk '!x[$0]++'|crontab -
-(crontab -l; echo "0 3 * * * rm /etc/freedmr/hbmon/data/*")|awk '!x[$0]++'|crontab -
+(crontab -l; echo "* */12 * * * data-id")|awk '!x[$0]++'|crontab -
 ###
 sudo cat > /etc/freedmr/hbmon/html/buttons.php <<- "EOF"
 <!-- HBMonitor buttons HTML code -->
@@ -492,10 +492,18 @@ EOF
 
 ##
 cp /bin/menu /bin/MENU
-
+#
+sudo cat > /bin/data-id <<- "EOF"
+#!/bin/bash
+wget /etc/freedmr/hbmon/data/talkgroup_ids.json https://freedmr.cymru/talkgroups/talkgroup_ids_json.php -O
+wget /etc/freedmr/hbmon/data/subscriber_ids.csv https://database.radioid.net/static/user.csv -O
+wget /etc/freedmr/hbmon/data/peer_ids.json https://database.radioid.net/static/rptrs.json -O
+EOF
+#
 sudo cat > /bin/start-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
+data-id
 docker compose down
 docker compose up -d
 EOF
@@ -516,8 +524,10 @@ echo "FreeDMR setup complete!"
 #############################################################
 chmod +x /bin/menu*
 chmod +x /bin/MENU
+chmod +x /bin/data-id
 chmod +x /bin/start-fdmr
 chmod +x /bin/stop-fdmr
+data-id
 history -c && history -w
 menu
 #####
