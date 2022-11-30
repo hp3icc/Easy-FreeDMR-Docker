@@ -30,6 +30,6 @@ RUN	apk update && \
 	apk del git gcc musl-dev && \
 	chown -R radio /hbmon
 
-USER 54000
+USER radio
 
 ENTRYPOINT [ "/entrypoint" ]
