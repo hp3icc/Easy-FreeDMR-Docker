@@ -27,6 +27,7 @@ RUN	apk update && \
 	cd /hbmon && \
 	git checkout Self_Service && \
 	pip install --no-cache-dir -r requirements.txt && \
+	pip install setproctitle && \
 	apk del git gcc musl-dev && \
 	chown -R radio /hbmon
 

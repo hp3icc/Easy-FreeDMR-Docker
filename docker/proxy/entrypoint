@@ -1,5 +1,5 @@
 #!/bin/sh
 
 cd /hbmon
-python /hbmon/proxy/hotspot_proxy_v2.py
+python /hbmon/proxy/hotspot_proxy_v2.py -c /hbmon/proxy/proxy.cfg
 
