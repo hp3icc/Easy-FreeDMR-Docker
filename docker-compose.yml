@@ -100,6 +100,16 @@ services:
            app_net:
              ipv4_address: 172.16.238.14
              
+    autoheal:
+        image: willfarrell/autoheal:latest
+        tty: true
+        container_name: autoheal
+        restart: always
+        environment:
+            - AUTOHEAL_CONTAINER_LABEL=all
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+
 networks:
   app_net:
     driver: bridge
