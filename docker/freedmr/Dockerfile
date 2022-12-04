@@ -27,7 +27,7 @@ RUN adduser -D -u 54000 radio && \
         apk del git gcc musl-dev && \
         chown -R radio: /opt/freedmr
 
-COPY entrypoint-proxy /entrypoint
+COPY entrypoint /entrypoint
 
 USER radio
 
