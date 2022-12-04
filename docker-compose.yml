@@ -84,9 +84,9 @@ services:
            app_net:
              ipv4_address: 172.16.238.13
              
-    python:
-        build: docker/python
-        container_name: python
+    monitor:
+        build: docker/monitor
+        container_name: monitor
         restart: "always"
         working_dir: /hbmon
         volumes:
@@ -99,6 +99,20 @@ services:
         networks:
            app_net:
              ipv4_address: 172.16.238.14
+             
+    proxy:
+        build: docker/proxy
+        container_name: proxy
+        restart: "always"
+        working_dir: /hbmon
+        volumes:
+            - './hbmon:/hbmon'
+        depends_on:
+            - 'freedmr'
+            - 'mariadb'
+        networks:
+           app_net:
+             ipv4_address: 172.16.238.15
              
     autoheal:
         image: willfarrell/autoheal:latest
