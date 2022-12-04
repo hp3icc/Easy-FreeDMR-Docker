@@ -17,7 +17,6 @@ services:
             - './hbmon/proxy/proxy_db.py:/opt/freedmr/proxy_db.py'
 
         ports:
-            - '62031:62031/udp'
             #Change the below to inlude ports used for your OBP(s)
             - '62041:62041/udp'
         restart: "always"
@@ -107,6 +106,8 @@ services:
         working_dir: /hbmon
         volumes:
             - './hbmon:/hbmon'
+        ports:
+            - '62031:62031/udp'
         depends_on:
             - 'freedmr'
             - 'mariadb'
