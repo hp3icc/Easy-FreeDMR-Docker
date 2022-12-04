@@ -13,6 +13,7 @@ FreeDMR Server Self-Service version Docker by CA5RPY Rodrigo, with Dashboard by 
 
 https://gitlab.hacknix.net/hacknix/FreeDMR/-/wikis/Installing-using-Docker-(recommended!)
 
+FreeDMR Server original version gitlab FreeDMR by G7RZU hacknix Simon.
 
 #
 
