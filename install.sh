@@ -328,6 +328,15 @@ sed -i "s/DB_NAME .*/DB_NAME = hbmon/" fdmr-mon.cfg
 sed -i "s/LOG_PATH = .\/log/LOG_PATH = .\//" fdmr-mon.cfg
 sed -i "s/LOG_LEVEL = INFO/LOG_LEVEL = DEBUG/" fdmr-mon.cfg
 
+
+sed -i "s/MASTER .*/MASTER = 172.16.238.10/" proxy/proxy.cfg
+sed -i "s/SERVER .*/SERVER = mariadb/" proxy/proxy.cfg
+sed -i "s/USERNAME .*/USERNAME = hbmon/" proxy/proxy.cfg
+sed -i "s/PASSWORD .*/PASSWORD = hbmon/" proxy/proxy.cfg
+sed -i "s/DB_NAME .*/DB_NAME = hbmon/" proxy/proxy.cfg
+
+
+#################
 apt-get install rrdtool -y
 
 sed -i 's/var\/www\/html/etc\/freedmr\/hbmon\/html/' /etc/freedmr/hbmon/sysinfo/cpu.sh
@@ -505,7 +514,7 @@ wget /etc/freedmr/hbmon/data/subscriber_ids.csv https://database.radioid.net/sta
 wget /etc/freedmr/hbmon/data/peer_ids.json https://database.radioid.net/static/rptrs.json -O
 
 wget /etc/freedmr/json/talkgroup_ids.json https://freedmr.cymru/talkgroups/talkgroup_ids_json.php -O
-wget /etc/freedmr/json/subscriber_ids.csv https://freedmr.cymru/talkgroups/users.json-O
+wget /etc/freedmr/json/subscriber_ids.csv https://freedmr.cymru/talkgroups/users.json -O
 wget /etc/freedmr/json/peer_ids.json https://database.radioid.net/static/rptrs.json -O
 
 EOF

@@ -25,14 +25,6 @@ then
         python /opt/freedmr/bridge.py -c freedmr.cfg -r rules.py
 else
 	echo 'Starting in FreeDMR mode...'
-	python /opt/freedmr/hotspot_proxy_v2.py &
 	python /opt/freedmr/playback.py -c loro.cfg &
-	python /opt/freedmr/bridge_master.py -c freedmr.cfg -r rules.py &
+	python /opt/freedmr/bridge_master.py -c freedmr.cfg -r rules.py
 fi
-
-# Wait for any process to exit
-wait -n
-  
-# Exit with status of process that exited first
-exit $?
-

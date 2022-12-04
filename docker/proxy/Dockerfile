@@ -15,19 +15,20 @@
 #   along with this program; if not, write to the Free Software Foundation,
 #   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 ###############################################################################
-FROM python:3.10-alpine
 
-RUN adduser -D -u 54000 radio && \
-        apk update && \
-        apk add git gcc musl-dev && \
-        cd /opt && \
-        git clone https://gitlab.hacknix.net/hacknix/FreeDMR.git freedmr && \
-        cd /opt/freedmr && \
-        pip install --no-cache-dir -r requirements.txt && \
-        apk del git gcc musl-dev && \
-        chown -R radio: /opt/freedmr
+FROM python:3.7-alpine
 
-COPY entrypoint-proxy /entrypoint
+COPY entrypoint /entrypoint
+
+RUN adduser -D -u 54000 radio
+RUN	apk update && \
+	apk add git gcc musl-dev libffi-dev openssl-dev cargo mariadb-connector-c-dev && \
+	git clone https://github.com/yuvelq/FDMR-Monitor.git /hbmon && \
+	cd /hbmon && \
+	git checkout Self_Service && \
+	pip install --no-cache-dir -r requirements.txt && \
+	apk del git gcc musl-dev && \
+	chown -R radio /hbmon
 
 USER radio
 
