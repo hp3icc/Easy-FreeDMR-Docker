@@ -461,7 +461,28 @@ sed -i "s/TGID_URL .*/TGID_URL = https:\/\/freedmr.cymru\/talkgroups\/talkgroup_
 sed -i "s/path2config .*/path2config = \"\/hbmon\/fdmr-mon.cfg\";/" html/include/config.php
 
 chmod -R 777 /etc/freedmr/hbmon/log
+######################################################################################
 
+sudo sed -i '166 s/hotpink/#ad02fd/g'   /etc/freedmr/hbmon/html/css/styles.php
+sudo sed -i '217 s/color:white/color:black/'  /etc/freedmr/hbmon/html/css/styles.php
+sudo sed -i "251d" /etc/freedmr/hbmon/html/css/styles.php
+sed '250 a    <?php echo THEME_COLOR."\\n";?>' -i /etc/freedmr/hbmon/html/css/styles.php
+
+sed '21 a # For custom color, select: pro' -i /etc/freedmr/hbmon/fdmr-mon.cfg
+
+sed '24 a COLOR_TEXT = #d8ea00' -i /etc/freedmr/hbmon/fdmr-mon.cfg 
+sed '25 a COLOR_1 = #29d103' -i /etc/freedmr/hbmon/fdmr-mon.cfg  
+sed '26 a COLOR_2 = #000000' -i /etc/freedmr/hbmon/fdmr-mon.cfg
+sed '27 a COLOR_BACKGROUND =  #adadad  ' -i /etc/freedmr/hbmon/fdmr-mon.cfg
+
+sed '45 a   $cd1 = strtolower($config["GLOBAL"]["COLOR_1"]);' -i /etc/freedmr/hbmon/html/include/config.php  
+sed '46 a   $cd2 = strtolower($config["GLOBAL"]["COLOR_2"]);' -i /etc/freedmr/hbmon/html/include/config.php  
+sed '47 a   $cd3 = strtolower($config["GLOBAL"]["COLOR_TEXT"]);' -i /etc/freedmr/hbmon/html/include/config.php 
+sed '48 a   $cd3 = strtolower($config["GLOBAL"]["COLOR_TEXT"]);' -i /etc/freedmr/hbmon/html/include/config.php
+sed '49 a   $cd4 = strtolower($config["GLOBAL"]["COLOR_BACKGROUND"]);' -i /etc/freedmr/hbmon/html/include/config.php 
+
+sed '66 a   } elseif ($theme == "pro") {' -i /etc/freedmr/hbmon/html/include/config.php  
+sed '67 a     $tc = "background-image: linear-gradient(to bottom, $cd1 0%, $cd2 100%);color:$cd3;";' -i /etc/freedmr/hbmon/html/include/config.php  
 
 ######################################
 chmod 755 /etc/freedmr -R
