@@ -470,7 +470,7 @@ chmod 755 /etc/freedmr -R
 cat > /bin/menu <<- "EOF"
 #!/bin/bash
 while : ; do
-choix=$(whiptail --title "Raspbian Proyect HP3ICC EasyFreeDMR Docker Version" --menu "move up or down with the keyboard arrows and select your option by pressing enter:" 17 56 8 \
+choix=$(whiptail --title "Raspbian Proyect HP3ICC EasyFreeDMR Docker Version by CA5RPY" --menu "move up or down with the keyboard arrows and select your option by pressing enter:" 17 65 8 \
 1 " Edit FreeDMR Server " \
 2 " Edit Interlink  " \
 3 " Edit FDMR-Monitor  " \
@@ -505,7 +505,7 @@ exit 0
 EOF
 
 ##
-cp /bin/menu /bin/MENU
+ln -s /bin/menu /bin/MENU
 #
 cat > /bin/data-id <<- "EOF"
 #!/bin/bash
