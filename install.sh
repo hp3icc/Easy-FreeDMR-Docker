@@ -522,7 +522,6 @@ EOF
 cat > /bin/start-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
-data-id
 docker compose down
 docker compose up -d
 cronedit.sh '* */12 * * *' 'data-id' add
@@ -572,6 +571,7 @@ chmod +x /bin/data-id
 chmod +x /bin/start-fdmr
 chmod +x /bin/stop-fdmr
 data-id
+start-fdmr
 history -c && history -w
 menu
 #####
