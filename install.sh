@@ -506,25 +506,13 @@ EOF
 
 ##
 ln -s /bin/menu /bin/MENU
-#
-cat > /bin/data-id <<- "EOF"
-#!/bin/bash
-wget /etc/freedmr/hbmon/data/talkgroup_ids.json https://freedmr.cymru/talkgroups/talkgroup_ids_json.php -O
-wget /etc/freedmr/hbmon/data/subscriber_ids.csv https://database.radioid.net/static/user.csv -O
-wget /etc/freedmr/hbmon/data/peer_ids.json https://database.radioid.net/static/rptrs.json -O
 
-wget /etc/freedmr/json/talkgroup_ids.json https://freedmr.cymru/talkgroups/talkgroup_ids_json.php -O
-wget /etc/freedmr/json/subscriber_ids.csv https://freedmr.cymru/talkgroups/users.json -O
-wget /etc/freedmr/json/peer_ids.json https://database.radioid.net/static/rptrs.json -O
-
-EOF
 ###############################################
 cat > /bin/start-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
 docker compose down
 docker compose up -d
-cronedit.sh '* */12 * * *' 'data-id' add
 cronedit.sh '*/5 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/graph.sh' add
 cronedit.sh '*/2 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/cpu.sh' add
 EOF
@@ -533,7 +521,6 @@ cat > /bin/stop-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
 docker compose down
-cronedit.sh '* */12 * * *' 'data-id' remove
 cronedit.sh '*/5 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/graph.sh' remove
 cronedit.sh '*/2 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/cpu.sh' remove
 EOF
@@ -567,10 +554,8 @@ echo "FreeDMR setup complete!"
 #############################################################
 chmod +x /bin/menu*
 chmod +x /bin/MENU
-chmod +x /bin/data-id
 chmod +x /bin/start-fdmr
 chmod +x /bin/stop-fdmr
-data-id
 start-fdmr
 history -c && history -w
 menu
