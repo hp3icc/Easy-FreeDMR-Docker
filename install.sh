@@ -510,11 +510,13 @@ ln -s /bin/menu /bin/MENU
 ###############################################
 cat > /bin/start-fdmr <<- "EOF"
 #!/bin/bash
+data-id &&
 cd /etc/freedmr
 docker compose down
 docker compose up -d
 cronedit.sh '*/5 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/graph.sh' add
 cronedit.sh '*/2 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/cpu.sh' add
+cronedit.sh '* */6 * * *' 'data-id' add
 EOF
 #
 cat > /bin/stop-fdmr <<- "EOF"
@@ -523,8 +525,19 @@ cd /etc/freedmr
 docker compose down
 cronedit.sh '*/5 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/graph.sh' remove
 cronedit.sh '*/2 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/cpu.sh' remove
+cronedit.sh '* */6 * * *' 'data-id' remove
 EOF
 ###############################################
+cat > /bin/data-id <<- "EOF"
+#!/bin/bash
+wget https://freedmr.cymru/talkgroups/talkgroup_ids_json.php -O /etc/freedmr/hbmon/data/talkgroup_ids.json
+wget https://database.radioid.net/static/user.csv -O /etc/freedmr/hbmon/data/subscriber_ids.csv
+wget https://database.radioid.net/static/rptrs.json -O /etc/freedmr/hbmon/data/peer_ids.json
+wget https://freedmr.cymru/talkgroups/talkgroup_ids_json.php -O /etc/freedmr/json/talkgroup_ids.json
+wget https://freedmr.cymru/talkgroups/users.json -O /etc/freedmr/json/subscriber_ids.csv
+wget https://database.radioid.net/static/rptrs.json -O /etc/freedmr/json/peer_ids.json
+EOF
+#################################
 cat > /usr/local/bin/cronedit.sh <<- "EOF"
 cronjob_editor () {
 # usage: cronjob_editor '<interval>' '<command>' <add|remove>
@@ -542,8 +555,8 @@ fi
 cronjob_editor "$1" "$2" "$3"
 EOF
 chmod +x /usr/local/bin/cronedit.sh
-
 #################################
+
 echo "Run FreeDMR container..."
 cd /etc/freedmr
 docker compose up -d
@@ -554,6 +567,7 @@ echo "FreeDMR setup complete!"
 #############################################################
 chmod +x /bin/menu*
 chmod +x /bin/MENU
+chmod +x /bin/data-id
 chmod +x /bin/start-fdmr
 chmod +x /bin/stop-fdmr
 start-fdmr
