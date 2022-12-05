@@ -1,4 +1,4 @@
-# Easy-FreeDMR-Docker   Proyecto en desarrollo, NO Utilizar !!!!!
+# Easy-FreeDMR-Docker  
 
  ![alt text](https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/FreeDMR-Docker.png)
 
