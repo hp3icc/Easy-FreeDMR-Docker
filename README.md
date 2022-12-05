@@ -37,7 +37,7 @@ into your ssh terminal copy and paste the following link :
   
  # Menu
  
- ![alt text](https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/easy-freedmr-docker.png)
+ ![alt text](https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/menu.png)
  
   At the end of the installation your freedmr server will be installed and working, a menu will be displayed that will make it easier for you to edit, restart or update your server and dashboard to future versions.
   
