@@ -374,7 +374,7 @@ fi
 sh /etc/freedmr/hbmon/sysinfo/rrd-db.sh
 (crontab -l; echo "*/5 * * * * sh /etc/freedmr/hbmon/sysinfo/graph.sh")|awk '!x[$0]++'|crontab -
 (crontab -l; echo "*/2 * * * * sh /etc/freedmr/hbmon/sysinfo/cpu.sh")|awk '!x[$0]++'|crontab -
-(crontab -l; echo "* */12 * * * data-id")|awk '!x[$0]++'|crontab -
+(crontab -l; echo "* */6 * * * data-id")|awk '!x[$0]++'|crontab -
 ###
 cat > /etc/freedmr/hbmon/html/buttons.php <<- "EOF"
 <!-- HBMonitor buttons HTML code -->
