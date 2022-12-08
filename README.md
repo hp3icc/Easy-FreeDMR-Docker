@@ -53,10 +53,12 @@ To integrate your server to the freedmr network, you must contact the telegram g
         
  #
  
- #
+ # Location files config
  
- # Location files config :
+  * Docker compose YML File:
  
+  /etc/freedmr/docker-compose.yml
+  
   * FreeDMR Server:  
    
   /etc/freedmr/freedmr.cfg  
@@ -72,7 +74,7 @@ To integrate your server to the freedmr network, you must contact the telegram g
    
  #
   
- # Dashboard Files
+ # Location Dashboard Files
  
  /etc/freedmr/hbmon/html/
 
