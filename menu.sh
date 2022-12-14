@@ -33,7 +33,7 @@ start-fdmr ;;
 6)
 stop-fdmr ;;
 7)
-clear && docker stats --all ;;
+docker stats --all ;;
 8)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/update.sh)";
 esac
