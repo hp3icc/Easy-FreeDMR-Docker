@@ -1,13 +1,11 @@
 #!/bin/bash
-cp /etc/freedmr/docker-compose.yml /opt/docker-compose.yml
-variable=$(grep "SERVER_ID:" /etc/freedmr/freedmr.cfg | tail -c 6)
-
 sudo cat > /bin/menu-update <<- "EOF"
 #!/bin/bash
 while : ; do
 choix=$(whiptail --title "Raspbian Proyect HP3ICC EasyFreeDMR Menu Update" --menu "move up or down with the keyboard arrows and select your option by pressing enter:" 15 56 6 \
-1 " Update FreeDMR Server " \
-2 " Main menu " 3>&1 1>&2 2>&3)
+1 " Update FreeDMR " \
+2 " Full Upgrade FreeDMR " \
+3 " Main menu " 3>&1 1>&2 2>&3)
 exitstatus=$?
 #on recupere ce choix
 #exitstatus=$?
@@ -21,6 +19,8 @@ case $choix in
 1)
 update-fdmr;;
 2)
+update-fdmr2;;
+3)
 break;
 esac
 done
@@ -31,16 +31,31 @@ exit 0
 
 EOF
 #
+
 sudo cat > /bin/update-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
 docker compose down
-#sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/install.sh)"
 docker compose pull
 docker compose up -d
 EOF
+sudo cat > /bin/update-fdmr2 <<- "EOF"
+#!/bin/bash
+cp /etc/freedmr/docker-compose.yml /opt/docker-compose.yml
+variable=$(grep "SERVER_ID:" /etc/freedmr/freedmr.cfg | tail -c 6)
+cd /etc/freedmr
+docker compose down
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/install.sh)"
+sudo sed -i "s/SERVER_ID:.*/SERVER_ID: $variable/g"  /etc/freedmr/freedmr.cfg
+cp /opt/docker-compose.yml /etc/freedmr/docker-compose.yml
+cat /opt/obp.txt >> /etc/freedmr/freedmr.cfg
+sh /opt/extra.sh
+docker compose down
+docker compose up -d
+
 #
 ########################
 chmod +x /bin/update-fdmr
+chmod +x /bin/update-fdmr2
 chmod +x /bin/menu-update
 menu-update
