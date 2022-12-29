@@ -18,6 +18,6 @@ al finalizar un Full Upgrade desde el menu.                          #
 
 EOF
 
-
+chmod +x /opt/extra.sh
 history -c && history -w
 menu
