@@ -1,5 +1,7 @@
 #!/bin/bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/install.sh)"
+cp /etc/freedmr/docker-compose.yml /opt/docker-compose.yml
+variable=$(grep "SERVER_ID:" /etc/freedmr/freedmr.cfg | tail -c 6)
+
 sudo cat > /bin/menu-update <<- "EOF"
 #!/bin/bash
 while : ; do
@@ -33,6 +35,7 @@ sudo cat > /bin/update-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
 docker compose down
+#sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/install.sh)"
 docker compose pull
 docker compose up -d
 EOF
