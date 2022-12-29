@@ -52,8 +52,7 @@ cat /opt/obp.txt >> /etc/freedmr/freedmr.cfg
 sh /opt/extra.sh
 docker compose down
 docker compose up -d
-
-#
+EOF
 ########################
 chmod +x /bin/update-fdmr
 chmod +x /bin/update-fdmr2
