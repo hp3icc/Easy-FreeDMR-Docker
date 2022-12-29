@@ -551,8 +551,6 @@ echo "FreeDMR setup complete!"
 chmod +x /bin/data-id
 chmod +x /bin/start-fdmr
 chmod +x /bin/stop-fdmr
-start-fdmr
-history -c && history -w
-menu
+
 #####
 
