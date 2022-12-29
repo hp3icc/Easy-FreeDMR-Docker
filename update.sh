@@ -47,6 +47,7 @@ docker compose up -d
 EOF
 sudo cat > /bin/update-fdmr2 <<- "EOF"
 #!/bin/bash
+stop-fdmr
 cp /etc/freedmr/docker-compose.yml /opt/docker-compose.yml
 variable=$(grep "SERVER_ID:" /etc/freedmr/freedmr.cfg | tail -c 6)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/install.sh)"
