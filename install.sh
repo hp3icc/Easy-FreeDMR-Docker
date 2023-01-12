@@ -338,7 +338,9 @@ sed -i "s/DB_NAME .*/DB_NAME = hbmon/" proxy/proxy.cfg
 
 #################
 cat > /etc/freedmr/hbmon/templates/main_table.html  <<- "EOF"
-<fieldset style="background-color:#A7A2A2;text-algin: lef; margin-left:15px;margin-right:15px;font-size:14px;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+
+
+<fieldset style="background-color:#b2b1b1;text-algin: lef; margin-left:15px;margin-right:15px;font-size:14px;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
 <center><b> Server Activity </b></legend></center>
 {% if _table['MASTERS']|length >0 %}
  <table style="table-layout:fixed;width:100%; font: 10pt arial, sans-serif;margin-top:5px;margin-bottom:5px;" width=100%>
@@ -367,7 +369,7 @@ cat > /etc/freedmr/hbmon/templates/main_table.html  <<- "EOF"
     {% endfor %}
 {% else %}
          <table style='width:100%; font: 13pt arial, sans-serif; margin-top:8px;'>
-             <tr style='border:none; background-color:#A7A2A2;'>
+             <tr style='border:none; background-color:#b2b1b1;'>
              <td style='border:none;height:60px;'><font color=brown><b><center>Waiting for Data from FreeDMR Server ...</center></b></td>
              </tr>
             </table>
@@ -388,7 +390,7 @@ cat > /etc/freedmr/hbmon/templates/main_table.html  <<- "EOF"
     </tr>
     {% endif %}
     {% endfor %}
-    <tr style="background-color:#A7A2A2;"><td colspan=3 height=5pt><hr style="height:1px;border:none;color:#A7A2A2;background-color:#A7A2A2;"></hr></td></tr>
+    <tr style="background-color:#b2b1b1;"><td colspan=3 height=5pt><hr style="height:1px;border:none;color:#b2b1b1;background-color:#b2b1b1;"></hr></td></tr>
 {% if _table['OPENBRIDGES']|length >0 %}
     <tr style="background-color:#265b8a;" "height:30px;width:100%; font: 10pt arial, sans-serif;{{ themec }}">
         <th style=color:#f1f1f1; 'width: 50%;'>Systems OpenBridge</th>
@@ -414,7 +416,7 @@ cat > /etc/freedmr/hbmon/templates/main_table.html  <<- "EOF"
 </table>
 </fieldset>
 {% if _table['SETUP']['LASTHEARD'] == True %}
-<br><fieldset style="border-radius: 8px; background-color:#A7A2A2;margin-left:15px;margin-right:15px;font-size:14px;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+<br><fieldset style="border-radius: 8px; background-color:#b2b1b1;margin-left:15px;margin-right:15px;font-size:14px;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
   <center><b> Lastheard </b></legend></center>
   <table style="table-layout:fixed;width:100%; font: 10pt arial, sans-serif;font-weight:600;margin-top:5px;margin-bottom:5px;border:none !important;border-collapse:collapse;border:none;" width=100%>
     <tr>
@@ -447,11 +449,11 @@ cat > /etc/freedmr/hbmon/templates/main_table.html  <<- "EOF"
   </table>
 </fieldset>
 {% endif %}
-<fieldset style="width:1070;background-color:#A7A2A2;text-algin: lef; margin-left:15px;margin-right:15px;font-size:14px;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+<fieldset style="width:1070;background-color:#b2b1b1;text-algin: lef; margin-left:15px;margin-right:15px;font-size:14px;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
 <center><b> Connected to Server System </b></legend></center>
 <table style="table-layout:fixed;width:100%; font: 10pt arial, sans-serif;font-weight:600;margin-top:5px;margin-bottom:5px;" width=100%>
 {% if _table['MASTERS']|length >0 %}
-<tr style="background-color:#A7A2A2;"><td>
+<tr style="background-color:#b2b1b1;"><td>
 <br>
 <div style="text-align:left;"><span style="color:#464646;font-weight:600;line-height:1.4;">&nbsp;&nbsp;LINKS:</span></div>
 <div style="text-align:left;font:9.5pt arial, sans-serif;font-weight:bold;margin-left:25px; margin-right:25px;line-height:1.4;white-space:normal;">
@@ -493,6 +495,7 @@ cat > /etc/freedmr/hbmon/templates/main_table.html  <<- "EOF"
 <br>
 </td></tr></table>
 </fieldset>
+
 EOF
 #############################
 apt-get install rrdtool -y
