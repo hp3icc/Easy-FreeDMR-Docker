@@ -337,8 +337,9 @@ sed -i "s/DB_NAME .*/DB_NAME = hbmon/" proxy/proxy.cfg
 
 
 #################
+sed -i "s/All rights reserved.<br>.*/All rights reserved.<br><a title=\"Raspbian Proyect by HP3ICC © <?php \$cdate=date(\"Y\"); if (\$cdate > \"2018\") {\$cdate=\"2018-\".date(\"Y\");} echo \$cdate; ?>\" target=\"_blank\" href=https:\/\/github.com\/hp3icc\/Easy-FreeDMR-Docker\/>Proyect: Easy-FreeDMR-Docker<\/a><br>/g" /etc/freedmr/hbmon/html/*.php
+sed -i "s/Copyright (c) 2016-.*/Copyright (c) <?php \$cdate=date(\"Y\"); if (\$cdate > \"2016\") {\$cdate=\"2016-\".date(\"Y\");} echo \$cdate; ?><br>/g" /etc/freedmr/hbmon/html/*.php
 cat > /etc/freedmr/hbmon/templates/main_table.html  <<- "EOF"
-
 
 <fieldset style="background-color:#b2b1b1;text-algin: lef; margin-left:15px;margin-right:15px;font-size:14px;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
 <center><b> Server Activity </b></legend></center>
