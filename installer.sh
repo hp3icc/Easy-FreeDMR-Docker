@@ -12,7 +12,7 @@ EOF
 sudo cat > /opt/obp.txt <<- "EOF"
 ######################################################################
 # Coloque abajo su lista de obp y peer para que se agreguen          #
-al finalizar un Full Upgrade desde el menu.                          #
+# al finalizar un Full Upgrade desde el menu.                        #
 ######################################################################
  
 
