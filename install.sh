@@ -511,8 +511,33 @@ fi
 }
 cronjob_editor "$1" "$2" "$3"
 EOF
-chmod +x /usr/local/bin/cronedit.sh
 
+chmod +x /usr/local/bin/cronedit.sh
+cat <<EOF > /etc/freedmr/hbmon/proxy/proxy.cfg
+[PROXY]
+MASTER =172.16.238.10
+LISTENPORT = 62031
+# Leave blank for IPv4, :: = all IPv4 and IPv6 (Dual Stack)
+LISTENIP =
+DESTPORTSTART = 54000
+DESTPORTEND = 54100
+TIMEOUT = 30
+STATS = False
+DEBUG = False
+CLIENTINFO = True
+BLACKLIST = [1234567]
+#e.g. {10.0.0.1: 0, 10.0.0.2: 0}
+IPBLACKLIST = {}
+
+[SELF SERVICE]
+USE_SELFSERVICE = True
+SERVER = 172.16.238.11
+USERNAME = hbmon
+# For no password leave it blank
+PASSWORD = hbmon
+DB_NAME = hbmon
+PORT = 3306
+EOF
 #################################
 echo "Run FreeDMR container..."
 cd /etc/freedmr
