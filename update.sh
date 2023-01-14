@@ -52,10 +52,12 @@ cp /etc/freedmr/docker-compose.yml /opt/docker-compose.yml
 variable=$(grep "SERVER_ID:" /etc/freedmr/freedmr.cfg | tail -c 6)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/install.sh)"
 sudo sed -i "s/SERVER_ID:.*/SERVER_ID: $variable/g"  /etc/freedmr/freedmr.cfg
-cp /opt/docker-compose.yml /etc/freedmr/docker-compose.yml
+#cp /opt/docker-compose.yml /etc/freedmr/docker-compose.yml
 cat /opt/obp.txt >> /etc/freedmr/freedmr.cfg
-#sh /opt/extra.sh
+chmod +x /opt/extra.sh
+sh /opt/extra.sh
 start-fdmr
+
 EOF
 ########################
 chmod +x /bin/update-fdmr
