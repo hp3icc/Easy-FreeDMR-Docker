@@ -25,7 +25,7 @@ sudo nano /opt/obp.txt;;
 3)
 nano /opt/extra.sh;;
 4)
-update-fdmr2
+update-fdmr2;;
 5)
 break;
 esac
