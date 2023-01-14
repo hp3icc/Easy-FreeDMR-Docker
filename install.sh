@@ -542,7 +542,8 @@ EOF
 echo "Run FreeDMR container..."
 cd /etc/freedmr
 docker compose up -d
-
+chmod +x /opt/extra.sh
+sh /opt/extra.sh
 echo "Read notes in /etc/freedmr/docker-compose.yml to understand how to implement extra functionality."
 echo "FreeDMR setup complete!"
 
