@@ -6,8 +6,7 @@ choix=$(whiptail --title "Raspbian Proyect HP3ICC EasyFreeDMR Menu Update" --men
 1 " Pull Update FreeDMR " \
 2 " List OBP & Peer " \
 3 " Extra Shell " \
-4 " Full Upgrade FreeDMR " \
-5 " Main menu " 3>&1 1>&2 2>&3)
+4 " Main menu " 3>&1 1>&2 2>&3)
 exitstatus=$?
 #on recupere ce choix
 #exitstatus=$?
@@ -25,8 +24,6 @@ sudo nano /opt/obp.txt;;
 3)
 nano /opt/extra.sh;;
 4)
-update-fdmr2;;
-5)
 break;
 esac
 done
