@@ -555,6 +555,6 @@ chmod +x /bin/stop-fdmr
 data-id
 history -c && history -w
 start-fdmr
-menu
+
 #####
 
