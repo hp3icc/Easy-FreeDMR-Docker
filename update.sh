@@ -6,7 +6,8 @@ choix=$(whiptail --title "Raspbian Proyect HP3ICC EasyFreeDMR Menu Update" --men
 1 " Pull Update FreeDMR " \
 2 " List OBP & Peer " \
 3 " Extra Shell " \
-4 " Main menu " 3>&1 1>&2 2>&3)
+4 " Full Reinstall " \
+5 " Main menu " 3>&1 1>&2 2>&3)
 exitstatus=$?
 #on recupere ce choix
 #exitstatus=$?
@@ -24,6 +25,8 @@ sudo nano /opt/obp.txt;;
 3)
 nano /opt/extra.sh;;
 4)
+update-fdmr2
+5)
 break;
 esac
 done
@@ -47,7 +50,7 @@ sudo cat > /bin/update-fdmr2 <<- "EOF"
 stop-fdmr
 cp /etc/freedmr/docker-compose.yml /opt/docker-compose.yml
 variable=$(grep "SERVER_ID:" /etc/freedmr/freedmr.cfg | tail -c 6)
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/installer.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/install.sh)"
 sudo sed -i "s/SERVER_ID:.*/SERVER_ID: $variable/g"  /etc/freedmr/freedmr.cfg
 cp /opt/docker-compose.yml /etc/freedmr/docker-compose.yml
 cat /opt/obp.txt >> /etc/freedmr/freedmr.cfg
