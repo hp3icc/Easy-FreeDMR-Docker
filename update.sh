@@ -4,10 +4,7 @@ sudo cat > /bin/menu-update <<- "EOF"
 while : ; do
 choix=$(whiptail --title "Raspbian Proyect HP3ICC EasyFreeDMR Menu Update" --menu "move up or down with the keyboard arrows and select your option by pressing enter:" 15 56 6 \
 1 " Pull Update FreeDMR " \
-2 " List OBP & Peer " \
-3 " Extra Shell " \
-4 " Full Reinstall " \
-5 " Main menu " 3>&1 1>&2 2>&3)
+2 " Main menu " 3>&1 1>&2 2>&3)
 exitstatus=$?
 #on recupere ce choix
 #exitstatus=$?
@@ -21,12 +18,6 @@ case $choix in
 1)
 update-fdmr;;
 2)
-sudo nano /opt/obp.txt;;
-3)
-nano /opt/extra.sh;;
-4)
-update-fdmr2;;
-5)
 break;
 esac
 done
