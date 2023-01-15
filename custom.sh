@@ -181,4 +181,24 @@ EOF
 sudo sed -i "s/Copyright (c) 2016-.*/Copyright (c) <?php \$cdate=date(\"Y\"); if (\$cdate > \"2016\") {\$cdate=\"2016-\".date(\"Y\");} echo \$cdate; ?><br>/g" /etc/freedmr/hbmon/html/*.php
 sudo sed -i "s/meta name=\"description.*/meta name=\"description\" content=\"Copyright (c) 2016-22.The Regents of the K0USY Group. All rights reserved. Version OA4DOA 2022 (v270422)\">/g" /etc/freedmr/hbmon/html/*.php
 sudo sed -i "s/All rights reserved.<br>.*/All rights reserved.<br><a title=\"Raspbian Proyect by HP3ICC © <?php \$cdate=date(\"Y\"); if (\$cdate > \"2018\") {\$cdate=\"2018-\".date(\"Y\");} echo \$cdate; ?>\" target=\"_blank\" href=https:\/\/github.com\/hp3icc\/Easy-FreeDMR-Docker\/>Proyect: Easy-FreeDMR-Docker<\/a><br>/g" /etc/freedmr/hbmon/html/*.php
+##
+sudo sed -i '166 s/hotpink/#ad02fd/g'   /etc/freedmr/hbmon/html/css/styles.php
+sudo sed -i '217 s/color:white/color:black/' /etc/freedmr/hbmon/html/css/styles.php
+sudo sed -i "251d" /etc/freedmr/hbmon/html/css/styles.php
+sed '250 a    <?php echo THEME_COLOR."\\n";?>' -i /etc/freedmr/hbmon/html/css/styles.php
 
+sed '21 a # For custom color, select: pro' -i /etc/freedmr/hbmon/fdmr-mon.cfg
+
+sed '24 a COLOR_TEXT = #d2c564' -i /etc/freedmr/hbmon/fdmr-mon.cfg 
+sed '25 a COLOR_1 = #c68034' -i /etc/freedmr/hbmon/fdmr-mon.cfg  
+sed '26 a COLOR_2 = #7f5224' -i /etc/freedmr/hbmon/fdmr-mon.cfg
+sed '27 a COLOR_BACKGROUND = 5a5958' -i /etc/freedmr/hbmon/fdmr-mon.cfg
+
+sed '45 a   $cd1 = strtolower($config["GLOBAL"]["COLOR_1"]);' -i /etc/freedmr/hbmon/html/include/config.php  
+sed '46 a   $cd2 = strtolower($config["GLOBAL"]["COLOR_2"]);' -i /etc/freedmr/hbmon/html/include/config.php  
+sed '47 a   $cd3 = strtolower($config["GLOBAL"]["COLOR_TEXT"]);' -i /etc/freedmr/hbmon/html/include/config.php 
+sed '48 a   $cd3 = strtolower($config["GLOBAL"]["COLOR_TEXT"]);' -i /etc/freedmr/hbmon/html/include/config.php
+sed '49 a   $cd4 = strtolower($config["GLOBAL"]["COLOR_BACKGROUND"]);' -i /etc/freedmr/hbmon/html/include/config.php 
+
+sed '66 a   } elseif ($theme == "pro") {' -i /etc/freedmr/hbmon/html/include/config.php  
+sed '67 a     $tc = "background-image: linear-gradient(to bottom, $cd1 0%, $cd2 100%);color:$cd3;";' -i /etc/freedmr/hbmon/html/include/config.php 
