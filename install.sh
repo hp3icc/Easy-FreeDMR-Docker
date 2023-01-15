@@ -509,8 +509,7 @@ PASSWORD = hbmon
 DB_NAME = hbmon
 PORT = 3306
 EOF
-##
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/custom.sh)"
+
 ###############################
 echo "Run FreeDMR container..."
 cd /etc/freedmr
