@@ -27,6 +27,7 @@ RUN	apk update && \
 	cd /hbmon && \
 	git checkout Self_Service && \
 	pip install --no-cache-dir -r requirements.txt && \
+	pip install pyOpenSSL==22.1.0 && \
 	apk del git gcc musl-dev && \
 	chown -R radio /hbmon
 
