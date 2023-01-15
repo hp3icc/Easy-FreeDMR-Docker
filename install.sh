@@ -524,6 +524,6 @@ chmod +x /bin/MENU
 chmod +x /bin/data-id
 chmod +x /bin/start-fdmr
 chmod +x /bin/stop-fdmr
-#data-id
+data-id
 history -c && history -w
 
