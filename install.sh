@@ -147,7 +147,6 @@ RELAX_CHECKS: True
 ENHANCED_OBP: True
 PROTO_VER: 2
 
-
 [SYSTEM]
 MODE: MASTER
 ENABLED: True
@@ -208,32 +207,6 @@ SUB_ACL: DENY:1
 TGID_TS1_ACL: PERMIT:ALL
 TGID_TS2_ACL: PERMIT:ALL
 ANNOUNCEMENT_LANGUAGE: es_ES
-
-[PROXY]
-MASTER: 127.0.0.1
-LISTENPORT: 62031
-# Leave blank for IPv4, ::: all IPv4 and IPv6 (Dual Stack)
-LISTENIP =
-DESTPORTSTART: 54000
-DESTPORTEND: 54100
-TIMEOUT: 30
-STATS: False
-DEBUG: False
-CLIENTINFO: False
-BLACKLIST: [1234567]
-#e.g. {10.0.0.1: 0, 10.0.0.2: 0}
-IPBLACKLIST: {}
- 
-[SELF SERVICE]
-ENABLED: False
-MODE: MASTER
-USE_SELFSERVICE: True
-SERVER: 172.16.238.11
-USERNAME: hbmon
-# For no password leave it blank
-PASSWORD: hbmon
-DB_NAME: hbmon
-PORT: 3306
 
 [D-APRS]
 MODE: MASTER
@@ -554,7 +527,8 @@ chmod +x /bin/start-fdmr
 chmod +x /bin/stop-fdmr
 #data-id
 history -c && history -w
-#start-fdmr
+start-fdmr
 
 #####
 
+menu
