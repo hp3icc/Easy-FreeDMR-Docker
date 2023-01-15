@@ -87,7 +87,7 @@ TGID_TS2_ACL: PERMIT:ALL
 GEN_STAT_BRIDGES: True
 ALLOW_NULL_PASSPHRASE: True
 ANNOUNCEMENT_LANGUAGES:
-SERVER_ID: 0000
+SERVER_ID: 71410
 DATA_GATEWAY: False
 VALIDATE_SERVER_IDS: False
 
@@ -104,32 +104,33 @@ LOG_HANDLERS: console-timed
 LOG_LEVEL: DEBUG
 LOG_NAME: FreeDMR
 
+
 [ALIASES]
 TRY_DOWNLOAD: True
 PATH: ./
 PEER_FILE: peer_ids.json
 SUBSCRIBER_FILE: subscriber_ids.json
 TGID_FILE: talkgroup_ids.json
-PEER_URL: https://www.radioid.net/static/rptrs.json
-SUBSCRIBER_URL: https://www.radioid.net/static/users.json
-#TGID_URL: http://downloads.freedmr.uk/downloads/talkgroup_ids.json
-TGID_URL: https://freedmr.cymru/talkgroups/talkgroup_ids_json.php
+PEER_URL: https://freedmr-lh.gb7fr.org.uk/json/peer_ids.json
+SUBSCRIBER_URL: https://freedmr-lh.gb7fr.org.uk/json/subscriber_ids.json
+TGID_URL: https://freedmr-lh.gb7fr.org.uk/json/talkgroup_ids.json
 LOCAL_SUBSCRIBER_FILE: local_subcriber_ids.json
 STALE_DAYS: 1
 SUB_MAP_FILE:
-SERVER_ID_URL: http://downloads.freedmr.uk/downloads/FreeDMR_Hosts.csv
+SERVER_ID_URL: https://freedmr-lh.gb7fr.org.uk/json/server_ids.tsv
 SERVER_ID_FILE: server_ids.tsv
+CHECKSUM_URL: https://freedmr-lh.gb7fr.org.uk/file_checksums.json
+CHECKSUM_FILE: file_checksums.json
 TOPO_FILE: topography.json
-
 
 #Control server shared allstar instance via dial / AMI
 [ALLSTAR]
-ENABLED: false
-USER:admin
-PASS: password
-SERVER: asl.example.com
+ENABLED: False
+USER:llcgi
+PASS: mypass
+SERVER: my.asl.server
 PORT: 5038
-NODE: 11111
+NODE: 0000
 
 [OBP-TEST]
 MODE: OPENBRIDGE
@@ -162,9 +163,9 @@ REG_ACL: DENY:1
 SUB_ACL: DENY:1
 TGID_TS1_ACL: PERMIT:ALL
 TGID_TS2_ACL: PERMIT:ALL
-DEFAULT_UA_TIMER: 10
+DEFAULT_UA_TIMER: 60
 SINGLE_MODE: True
-VOICE_IDENT: False
+VOICE_IDENT: True
 TS1_STATIC:
 TS2_STATIC:
 DEFAULT_REFLECTOR: 0
@@ -173,6 +174,7 @@ GENERATOR: 100
 ALLOW_UNREG_ID: True
 PROXY_CONTROL: False
 OVERRIDE_IDENT_TG:
+
 
 [ECHO]
 MODE: PEER
@@ -235,6 +237,7 @@ PROXY_CONTROL: False
 OVERRIDE_IDENT_TG:
 
 
+
 EOF
 #
 
@@ -253,7 +256,7 @@ BRIDGES = {
 if __name__ == '__main__':
     from pprint import pprint
     pprint(BRIDGES)
-    
+       
 EOF
 #
 echo "Set perms on config directory..."
