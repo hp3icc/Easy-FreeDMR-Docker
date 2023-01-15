@@ -1,6 +1,6 @@
 #!/bin/sh
 if [[ $EUID -ne 0 ]]; then
-	whiptail --title "CL-Link" --msgbox "Debe ejecutar este script como usuario ROOT" 0 50
+	whiptail --title "Easy-FreeDMR-Docker" --msgbox "Debe ejecutar este script como usuario ROOT" 0 50
 	exit 0
 fi
 ######################################
@@ -460,9 +460,7 @@ chmod 755 /etc/freedmr -R
 
 #############################
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/menu.sh)";
-##
-cp /bin/menu /bin/MENU
-#
+###
 cat > /bin/data-id <<- "EOF"
 #!/bin/bash
 wget /etc/freedmr/hbmon/data/talkgroup_ids.json https://freedmr.cymru/talkgroups/talkgroup_ids_json.php -O
@@ -478,7 +476,7 @@ EOF
 cat > /bin/start-fdmr <<- "EOF"
 #!/bin/bash
 cd /etc/freedmr
-data-id
+#data-id
 docker compose down
 docker compose up -d
 cronedit.sh '* */12 * * *' 'data-id' add
@@ -552,9 +550,9 @@ chmod +x /bin/MENU
 chmod +x /bin/data-id
 chmod +x /bin/start-fdmr
 chmod +x /bin/stop-fdmr
-data-id
+#data-id
 history -c && history -w
-start-fdmr
+#start-fdmr
 
 #####
-
+menu
