@@ -6,10 +6,10 @@ is an excerpt from the emq-TE1ws proyect, focused on new and current sysops who 
 
 this shell, install FreeDMR Server and FDMR-Monitor
 
-FreeDMR Server Self-Service version Docker by CA5RPY Rodrigo, with Dashboard by OA4DOA ,last original version gitlab FreeDMR by G7RZU hacknix Simon.
+FreeDMR Server Self-Service version Docker by CA5RPY Rodrigo, with Dashboard by OA4DOA ,last original version gitlab FreeDMR by G7RZU hacknix Simon, template mods by WP3JM James .
 
 #
-# Important note , this is an experimental modified script with no support ! if you require support , refer to the original developer script :
+# Important note , Unofficial script to install Freedmr Server with Dashboard self-service, if you require support from the official version of the developer , refer to the original developer script :
 
 https://gitlab.hacknix.net/hacknix/FreeDMR/-/wikis/Installing-using-Docker-(recommended!)
 
