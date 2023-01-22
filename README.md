@@ -59,7 +59,7 @@ into your ssh terminal copy and paste the following link :
  
  #
  
- # Self-service username and password
+ # Self-Service username and password
  
  The user will always be indicative that he has his hotspot or application connected to the server. 
 
@@ -70,6 +70,8 @@ Password example " abc123 " :
 Options=PASS=abc123
  
  ![alt text](https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/pistar.png)
+ 
+ The password must contain at least 6 characters between letters and numbers, you cannot use your callsign as a password.
  
 #
 
