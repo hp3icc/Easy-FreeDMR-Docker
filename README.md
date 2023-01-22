@@ -65,14 +65,15 @@ into your ssh terminal copy and paste the following link :
 
 the password is chosen by the user and placed in the options line as follows: " PASS=password_of user_selfservice"
 
-Password example abc123 :
+Password example " abc123 " :
 
+Options=PASS=abc123
+ 
  ![alt text](https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/pistar.png)
  
-        Options=PASS=abc123
-        
- #
- # Server startup
+#
+
+# Server startup
 
 To integrate your server to the freedmr network, you must contact the telegram group
 
