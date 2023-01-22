@@ -51,7 +51,12 @@ into your ssh terminal copy and paste the following link :
  
  The self-service feature, added by fellow OA4DOA Christian, allows each user to add or remove one or more static tgs from the ease of a graphical environment from the server's Dashboard. 
  
- Thanks to colleague IU2NAF Diego and the FreeDMR Italia team, they add Dial-TG compatibility and option to customize the language of the announcement voice or use CW
+ Thanks to colleague IU2NAF Diego and the FreeDMR Italia team, they add Dial-TG compatibility and option to customize the language of the announcement voice or use CW.
+ 
+ # self-service database
+
+ the Self-Service function uses a local database, this database does not store private information, it only stores the callsign, id and list of static tgs, created by the same user, the password is the callsign that the hotspot has and The password is decided by the user from his hotspot in the options line, without sending a previous request, filling out a ticket, sending an email or asking someone else for authorization. The user can configure the same password for all their hotspots, repeaters or connections, or they can configure an independent password for each connected equipment. They can only use Self-Service if they have previously configured their password in the options line and their equipment or application. is connected to the server
+ 
  #
  
  # Server startup
