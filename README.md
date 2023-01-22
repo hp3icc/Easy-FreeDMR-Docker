@@ -45,6 +45,15 @@ into your ssh terminal copy and paste the following link :
   
  #
  
+ # Self-Service
+ 
+ ![alt text](https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/self-service-docker.jpg)
+ 
+ The self-service feature, added by fellow OA4DOA Christian, allows each user to add or remove one or more static tgs from the ease of a graphical environment from the server's Dashboard. 
+ 
+ Thanks to colleague IU2NAF Diego and the FreeDMR Italia team, they add Dial-TG compatibility and option to customize the language of the announcement voice or use CW
+ #
+ 
  # Server startup
 
 To integrate your server to the freedmr network, you must contact the telegram group
