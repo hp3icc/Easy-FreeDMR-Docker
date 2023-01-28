@@ -343,6 +343,9 @@ sh /etc/freedmr/hbmon/sysinfo/rrd-db.sh
 (crontab -l; echo "*/2 * * * * sh /etc/freedmr/hbmon/sysinfo/cpu.sh")|awk '!x[$0]++'|crontab -
 (crontab -l; echo "* */12 * * * data-id")|awk '!x[$0]++'|crontab -
 ###
+wget https://www.freedmr.uk/wp-content/uploads/2021/04/favicon.ico -O /etc/freedmr/hbmon/html/favicon.ico
+wget https://www.freedmr.uk/wp-content/uploads/2021/04/Free_DMR_logo_250x141_72.png -O /etc/freedmr/hbmon/html/img/logo.png
+sudo sed '6 a <link rel="shortcut icon" href="/favicon.ico" />' -i /etc/freedmr/hbmon/html/index.php
 cat > /etc/freedmr/hbmon/html/buttons.php <<- "EOF"
 <!-- HBMonitor buttons HTML code -->
 <a class="button" href="index.php">Home</a>
