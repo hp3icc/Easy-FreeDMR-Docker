@@ -178,6 +178,9 @@ Restart=on-abort
 WantedBy=multi-user.target
 EOF
 #
+wget https://www.freedmr.uk/wp-content/uploads/2021/04/favicon.ico -O /etc/freedmr/hbmon/html/favicon.ico
+wget https://www.freedmr.uk/wp-content/uploads/2021/04/Free_DMR_logo_250x141_72.png -O /etc/freedmr/hbmon/html/img/logo.png
+sudo sed '6 a <link rel="shortcut icon" href="/favicon.ico" />' -i /etc/freedmr/hbmon/html/index.php
 sudo sed -i "s/Copyright (c) 2016-.*/Copyright (c) <?php \$cdate=date(\"Y\"); if (\$cdate > \"2016\") {\$cdate=\"2016-\".date(\"Y\");} echo \$cdate; ?><br>/g" /etc/freedmr/hbmon/html/*.php
 sudo sed -i "s/meta name=\"description.*/meta name=\"description\" content=\"Copyright (c) 2016-22.The Regents of the K0USY Group. All rights reserved. Version OA4DOA 2022 (v270422)\">/g" /etc/freedmr/hbmon/html/*.php
 sudo sed -i "s/All rights reserved.<br>.*/All rights reserved.<br><a title=\"Raspbian Proyect by HP3ICC © <?php \$cdate=date(\"Y\"); if (\$cdate > \"2018\") {\$cdate=\"2018-\".date(\"Y\");} echo \$cdate; ?>\" target=\"_blank\" href=https:\/\/github.com\/hp3icc\/Easy-FreeDMR-Docker\/>Proyect: Easy-FreeDMR-Docker<\/a><br>/g" /etc/freedmr/hbmon/html/*.php
