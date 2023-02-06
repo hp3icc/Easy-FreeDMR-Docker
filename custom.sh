@@ -1,8 +1,6 @@
 ####   table
 cat > /etc/freedmr/hbmon/templates/main_table.html  <<- "EOF"
 
-
-
 <fieldset class="big">
 <legend><b><font color="#000">&nbsp;.: Server Activity :.&nbsp;</font></b></legend>
 {% if _table['MASTERS']|length >0 %}
@@ -17,12 +15,12 @@ cat > /etc/freedmr/hbmon/templates/main_table.html  <<- "EOF"
     {% if _cdata[1]['TS'] == True or _cdata[2]['TS'] == True %}
     <tr style="background-color:#a1dcb5;">
         {% if _cdata[1]['TRX'] == "RX" %}
-        <td style="font-weight:bold; padding-left: 20px; text-align:left;color:#464646;">M: {{_master}} </td>
+        <td style="font-weight:bold; padding-left: 20px; text-align:center;color:#464646;">M: {{_master}} </td>
         <td style="font: 9.5pt arial, sans-serif;font-weight: 600;color:#0d1a81;">{{ _cdata[1]['SUB']|safe }} [<span style="align-items: center;justify-content:center;font-size: 8pt;font-weight:600;color:brown;">TS {{ 1 if _cdata[1]['TS'] == True else 2 }}</span>]</td>
         <td style="font: 9.5pt arial, sans-serif;font-weight: 600;color:#b5651d;">{{ _cdata[1]['DEST']|safe }}</td>
         {% endif %}
         {% if _cdata[2]['TRX'] == "RX" %}
-        <td style="font-weight:bold; padding-left: 20px; text-align:left;color:#464646"><b>M: {{_master}} </td>
+        <td style="font-weight:bold; padding-left: 20px; text-align:center;color:#464646"><b>M: {{_master}} </td>
         <td style="font: 9.5pt arial, sans-serif;font-weight: 600;color:#0d1a81;">{{ _cdata[2]['SUB']|safe }} [<span style="align-items: center;justify-content:center;font-size: 8pt;font-weight:600;color:brown;">TS {{ 1 if _cdata[1]['TS'] == True else 2 }}</span>]</td>
         <td style="font: 9.5pt arial, sans-serif;font-weight: 600;color:#b5651d;">{{ _cdata[2]['DEST']|safe }}</td>
         {% endif %}
@@ -30,7 +28,6 @@ cat > /etc/freedmr/hbmon/templates/main_table.html  <<- "EOF"
     {% endif %}
     {% endfor %}
     {% endfor %}
-
 {% else %}
          <table style='width:1100px; font: 13pt arial, sans-serif; margin-top:8px;'>
              <tr style='border:none; background-color:#f1f1f1;'>
@@ -42,12 +39,12 @@ cat > /etc/freedmr/hbmon/templates/main_table.html  <<- "EOF"
     {% if _pdata[1]['TS'] == True or _pdata[2]['TS'] == True %}
     <tr style="background-color:#f9f9f9f9;">
         {% if _pdata[1]['TRX'] == "RX" %}
-        <td style="font-weight:bold; padding-left: 20px; text-align:left;color:#464646;">P: {{_peer}} </td>
+        <td style="font-weight:bold; padding-left: 20px; text-align:center;color:#464646;">P: {{_peer}} </td>
         <td style="font: 9.5pt arial, sans-serif;font-weight: 600;color:#0d1a81;">{{ _pdata[1]['SUB']|safe }} [<span style="align-items: center;justify-content:center;font-size: 8pt;font-weight:600;color:brown;">TS {{ 1 if _pdata[1]['TS'] == True else 2 }}</span>]</td>
         <td style="font: 9.5pt arial, sans-serif;font-weight: 600;color:#b5651d;">{{ _cdata[1]['DEST']|safe }}</td>
         {% endif %}
         {% if _pdata[2]['TRX'] == "RX" %}
-        <td style="font-weight:bold; padding-left: 20px; text-align:left;color:#464646;">P: {{_peer}} </td>
+        <td style="font-weight:bold; padding-left: 20px; text-align:center;color:#464646;">P: {{_peer}} </td>
         <td style="font: 9.5pt arial, sans-serif;font-weight: 600;color:#0d1a81;">{{ _pdata[2]['SUB']|safe }} [<span style="align-items: center;justify-content:center;font-size: 8pt;font-weight:600;color:brown;">TS {{ 1 if _pdata[1]['TS'] == True else 2 }}</span>]</td>
         <td style="font: 9.5pt arial, sans-serif;font-weight: 600;color:#b5651d;">{{ _pdata[2]['DEST']|safe }}</td>
         {% endif %}
@@ -55,7 +52,6 @@ cat > /etc/freedmr/hbmon/templates/main_table.html  <<- "EOF"
     {% endif %}
     {% endfor %}
     <tr style="background-color:#f0f0f0;"><td colspan=3 height=5pt><hr style="height:1px;border:none;color:#f0f0f0;background-color:#f0f0f0;"></hr></td></tr>
-
 {% if _table['OPENBRIDGES']|length >0 %}
     <tr style="background-color:#265b8a;" "height:30px;width:1100px; font: 10pt arial, sans-serif;{{ themec }}">
         <th>Systems OpenBridge</th>
@@ -69,7 +65,7 @@ cat > /etc/freedmr/hbmon/templates/main_table.html  <<- "EOF"
        {% endfor %}
        {% if rx.value == 1 %}    
        <tr style="background-color:#de8184;">
-         <td style="font-weight:bold; padding-left: 20px; text-align:left;"> {{ _openbridge}} </td>
+         <td style="font-weight:bold; padding-left: 20px; text-align:center;"> {{ _openbridge}} </td>
          <td colspan=2 style="background-color:#a1dcb5; font: 9pt arial, sans-serif; font-weight: 600; color:#464646;">
          {% for entry in _table['OPENBRIDGES'][_openbridge]['STREAMS']  if _table['OPENBRIDGES'][_openbridge]['STREAMS'][entry][0] == 'RX' %}[<span style="color:#008000;">{{ _table['OPENBRIDGES'][_openbridge]['STREAMS'][entry][0] }}</span>: <font color=#0065ff> {{ _table['OPENBRIDGES'][_openbridge]['STREAMS'][entry][1] }}</font> >> <font color=#b5651d> {{ _table['OPENBRIDGES'][_openbridge]['STREAMS'][entry][2] }}</font>]&nbsp; {% endfor %}
         </td>
@@ -80,12 +76,6 @@ cat > /etc/freedmr/hbmon/templates/main_table.html  <<- "EOF"
 {% endif %}
 </table>
 </fieldset>
-
-
-
-
-
-
 {% if _table['SETUP']['LASTHEARD'] == True %}
 <fieldset class="big">
   <legend><b>.: Lastheard :.</b></legend>
@@ -120,7 +110,6 @@ cat > /etc/freedmr/hbmon/templates/main_table.html  <<- "EOF"
   </table>
 </fieldset>
 {% endif %}
-
 <fieldset class="big">
   <legend><b>.: Connected to Server :.</b></legend>
   <div class="conn2srv">
