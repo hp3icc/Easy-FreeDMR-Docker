@@ -202,9 +202,9 @@ sed '250 a    <?php echo THEME_COLOR."\\n";?>' -i /etc/freedmr/hbmon/html/css/st
 
 sed '21 a # For custom color, select: pro' -i /etc/freedmr/hbmon/fdmr-mon.cfg
 
-sed '24 a COLOR_TEXT = #d2c564' -i /etc/freedmr/hbmon/fdmr-mon.cfg 
-sed '25 a COLOR_1 = #c68034' -i /etc/freedmr/hbmon/fdmr-mon.cfg  
-sed '26 a COLOR_2 = #7f5224' -i /etc/freedmr/hbmon/fdmr-mon.cfg
+sed '24 a COLOR_TEXT = #fff519' -i /etc/freedmr/hbmon/fdmr-mon.cfg 
+sed '25 a COLOR_1 = #000080' -i /etc/freedmr/hbmon/fdmr-mon.cfg  
+sed '26 a COLOR_2 = #193dff' -i /etc/freedmr/hbmon/fdmr-mon.cfg
 sed '27 a COLOR_BACKGROUND = 5a5958' -i /etc/freedmr/hbmon/fdmr-mon.cfg
 
 sed '45 a   $cd1 = strtolower($config["GLOBAL"]["COLOR_1"]);' -i /etc/freedmr/hbmon/html/include/config.php  
