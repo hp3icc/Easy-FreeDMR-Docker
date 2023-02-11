@@ -285,7 +285,7 @@ cp /etc/freedmr/docker/mariadb/hbmon.sql /etc/freedmr/mysql/initdb.d/
 #################
 echo "Downloading hbmon..."
 
-git clone https://github.com/yuvelq/FDMR-Monitor.git /etc/freedmr/hbmon
+git clone https://github.com/hp3icc/FDMR-Monitor.git /etc/freedmr/hbmon
 cd /etc/freedmr/hbmon
 git checkout Self_Service
 chown -R 54000 /etc/freedmr/hbmon/log
