@@ -23,7 +23,7 @@ COPY entrypoint /entrypoint
 RUN adduser -D -u 54000 radio
 RUN	apk update && \
 	apk add git gcc musl-dev libffi-dev openssl-dev cargo mariadb-connector-c-dev && \
-	git clone https://github.com/yuvelq/FDMR-Monitor.git /hbmon && \
+	git clone https://github.com/hp3icc/FDMR-Monitor.git /hbmon && \
 	cd /hbmon && \
 	git checkout Self_Service && \
 	pip install --no-cache-dir -r requirements.txt && \
