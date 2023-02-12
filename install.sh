@@ -457,7 +457,7 @@ cd /etc/freedmr
 data-id
 docker compose down
 docker compose up -d
-cronedit.sh '* */12 * * *' 'data-id' add
+cronedit.sh '* */24 * * *' 'data-id' add
 cronedit.sh '*/5 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/graph.sh' add
 cronedit.sh '*/2 * * * *' 'sh /etc/freedmr/hbmon/sysinfo/cpu.sh' add
 EOF
