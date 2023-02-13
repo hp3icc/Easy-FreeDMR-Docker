@@ -32,7 +32,7 @@ into your ssh terminal copy and paste the following link :
 
     apt-get install curl sudo -y
 
-    sh -c "$(curl -fsSL https://gitlab.com/hp3icc/Easy-FreeDMR-Docker/-/raw/main/installer.sh)"
+    sh -c "$(curl -fsSL https://gitlab.com/hp3icc/Easy-FreeDMR-Docker/-/raw/main/install.sh)"
 
                
              
