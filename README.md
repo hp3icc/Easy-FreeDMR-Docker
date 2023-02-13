@@ -1,4 +1,4 @@
-# Easy-FreeDMR-Docker  
+# Easy-FreeDMR-Docker now is FDMR+D 
 
  ![alt text](https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/Easy-FreeDMR-Docker.png)
 
